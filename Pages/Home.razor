@@ -1,0 +1,104 @@
+﻿@using MudBlazor
+@using MudBlazor.Services
+
+
+@inject IJSRuntime JSRuntime
+
+
+@page "/"
+
+<PageTitle>Aiden Rogers</PageTitle>
+
+@* row *@
+<MudContainer class="mt-6">
+    <MudGrid>
+        <MudItem sm="12" md="6">
+            <a href="/">
+                <MudText Typo="Typo.h2" Class="mud-text-primary" Style="font-weight: bold;">Aiden Rogers</MudText>
+            </a>
+            <MudText Typo="Typo.h5">Graduate Software Engineer</MudText>
+            <MudPaper Elevation="15" Class="mud-elevation-3 rounded-circle my-4" Style="width: 250px; height:
+            250px;">
+                <img src="images/me.png" alt="Aiden Rogers" class="rounded-circle"
+                    style="width: 250px; height: 250px;" />
+            </MudPaper>
+
+            <MudText Typo="Typo.body1" style="margin-right: 10rem">
+                Mollit ex dolor exercitation laborum excepteur ea labore.
+            </MudText>
+            <MudHidden Breakpoint="Breakpoint.SmAndDown">
+                <MudList class="mt-10 ">
+                    <MudListItem>
+                        <a href="#about">
+                            <MudText Typo="Typo.body1">About</MudText>
+                        </a>
+                    </MudListItem>
+                    <MudListItem>
+                        <a href="#experience">
+                            <MudText Typo="Typo.body1">Experience</MudText>
+                        </a>
+                    </MudListItem>
+                    <MudListItem>
+                        <a href="#projects">
+                            <MudText Typo="Typo.body1">Projects</MudText>
+                        </a>
+                    </MudListItem>
+                </MudList>
+
+            </MudHidden>
+        </MudItem>
+        <MudItem sm="12" md="6">
+            <MudText id="experience" Typo="Typo.h4" class="mt-5" Color="Color.Secondary">About Me</MudText>
+
+            <MudText Typo="Typo.body1">Hi! My name is Aiden, I have just finished my Bachelor of Software Engineering at
+                the <MudLink Href="https://www.canberra.edu.au/" Typo="Typo.body2" Underline="Underline.None">University
+                    of Canberra</MudLink>, and I am
+                keen to start
+                building
+                stuff!</MudText>
+
+            <MudText Typo="Typo.body1" class="mt-4">I am a software engineer with a passion for web development, I have
+                experience in
+                front-end and back-end development, and I am always looking to learn new technologies.</MudText>
+            <MudText Typo="Typo.body1" class="mt-4">Anim aute dolore officia amet esse nostrud laborum elit enim culpa
+                ullamco. Sint officia commodo sunt Lorem commodo laboris incididunt excepteur quis reprehenderit nulla
+                cillum nostrud anim. Et dolore ad sint eiusmod. Eu proident tempor Lorem consectetur duis cillum ex
+                nostrud incididunt pariatur aliqua. Non elit et mollit mollit magna non. Consectetur et eu aute aute
+                eiusmod Lorem adipisicing laborum. Amet ex laboris incididunt id.
+            </MudText>
+
+            <MudText Typo="Typo.h5" class="mt-5" Color="Color.Secondary">Skills and Tech
+                Stack</MudText>
+
+            <MudText>
+                HTML5 <span>
+                    <MudIcon Icon="fa-brands fa-html5" Color="Color.Primary" Size="Size.Small" />
+                </span> CSS3 <span> 
+                    <MudIcon Icon="fa-brands fa-css3-alt" Color="Color.Primary" Size="Size.Small" />
+                </span> JavaScript <span>
+                    <MudIcon Icon="fa-brands fa-js-square" Color="Color.Primary" Size="Size.Small" />
+                </span> SQL <span>
+                    <MudIcon Icon="fa-solid fa-database" Color="Color.Primary" Size="Size.Small" />
+                </span> Git <span>
+                    <MudIcon Icon="fa-brands fa-git-alt" Color="Color.Primary" Size="Size.Small" />
+                </span> Bootstrap <span>
+                    <MudIcon Icon="fa-brands fa-bootstrap" Color="Color.Primary" Size="Size.Small" />
+                </span> Azure <span>
+                    <MudIcon Icon="fa-brands fa-microsoft" Color="Color.Primary" Size="Size.Small" />
+                </span> Docker <span>
+                    <MudIcon Icon="fa-brands fa-docker" Color="Color.Primary" Size="Size.Small" />
+                </span>
+            </MudText>
+
+            <MudText id="experience" Typo="Typo.h4" class="mt-5" Color="Color.Secondary">Experience</MudText>
+            
+
+
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+
+@code {
+
+}

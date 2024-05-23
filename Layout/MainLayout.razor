@@ -1,0 +1,74 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
+
+<MudLayout style="overflow: hidden;">
+    <div id="blob"></div>
+    <div id="blur"></div>
+
+    <MudAppBar Elevation="5" Style="opacity: 0.98">
+        <MudButton href="/blog" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Blog
+        </MudButton>
+
+        <MudSpacer />
+        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
+            Color="Color.Primary" OnClick="@ToggleDarkMode" />
+
+        <div style="width: 10px;"></div>
+
+        @* Github icon with link *@
+        <MudLink Href="https://github.com/ACRonm" Target="_blank">
+            <MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" />
+        </MudLink>
+    </MudAppBar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+<script src="./javascript/blob.js"></script>
+
+
+@code {
+
+    private bool _isDarkMode = true;
+    private bool _drawerOpen = false;
+
+    void ToggleDarkMode()
+    {
+        _isDarkMode = !_isDarkMode;
+    }
+
+    void ToggleDrawer()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    MudTheme CustomTheme = new MudTheme()
+        {
+            Typography = new Typography()
+            {
+                Default = new Default()
+                {
+                    FontFamily = new[] { "Roboto" },
+                },
+            },
+
+            Palette = new PaletteLight()
+            {
+                Background = "#f5f5f5",
+                Primary = "#8B0000",
+                Secondary = "#8B0000",
+                AppbarBackground = "#f5f5f5",
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Background = "#1A1A27",
+                AppbarBackground = "#1A1A27",
+                Primary = "#FFC701",
+                TextPrimary = "#CBD6ED",
+                Secondary = "#FFC701",
+
+            }
+        };
+
+}
