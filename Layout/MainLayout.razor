@@ -42,12 +42,14 @@
 
 @code {
 
-    string? _page = "/";
+    string? _page;
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
 
     protected override void OnInitialized()  // Corrected here
     {
+        var uri = new Uri(NavManager.Uri).AbsolutePath;
+        _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
     }
 
