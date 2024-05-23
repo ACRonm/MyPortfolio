@@ -51,7 +51,7 @@
         NavManager.LocationChanged += HandleLocationChanged;
     }
 
-    private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var uri = new Uri(e.Location);
         _page = uri.AbsolutePath;
