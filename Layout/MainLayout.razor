@@ -42,7 +42,7 @@
 
 @code {
 
-    string? _page;
+    string? _page = "/";
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
 
@@ -55,6 +55,7 @@
     {
         var uri = new Uri(e.Location);
         _page = uri.AbsolutePath;
+
         StateHasChanged();
     }
 
