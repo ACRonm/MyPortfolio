@@ -1,14 +1,23 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
+
+@inject NavigationManager NavManager
+@inject IJSRuntime JSRuntime
 
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
 
 <MudLayout style="overflow: hidden;">
-    <div id="blob"></div>
-    <div id="blur"></div>
 
     <MudAppBar Elevation="5" Style="opacity: 0.98">
-        <MudButton href="/blog" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Blog
-        </MudButton>
+
+        @if( _page == "/")
+        {
+        <MudButton href="/blog" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Blog</MudButton>
+        }
+        else
+        {
+        <MudButton href="/" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Home</MudButton>
+        }
+
 
         <MudSpacer />
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
@@ -22,6 +31,9 @@
         </MudLink>
     </MudAppBar>
     <MudMainContent>
+        <div id="blob"></div>
+        <div id="blur"></div>
+
         @Body
     </MudMainContent>
 </MudLayout>
@@ -30,8 +42,21 @@
 
 @code {
 
+    string? _page;
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
+
+    protected override void OnInitialized()  // Corrected here
+    {
+        NavManager.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        var uri = new Uri(e.Location);
+        _page = uri.AbsolutePath;
+        StateHasChanged();
+    }
 
     void ToggleDarkMode()
     {
