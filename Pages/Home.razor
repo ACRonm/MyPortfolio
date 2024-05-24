@@ -7,12 +7,16 @@
 
 @page "/"
 
+
+
 <PageTitle>Aiden Rogers</PageTitle>
+
+
 
 @* row *@
 <MudContainer class="mt-6">
-    <MudGrid>
-        <MudItem sm="12" md="6">
+    <MudGrid id="portfolio-columns">
+        <MudItem id="profile-picture" sm="12" md="6" class="sidebar-nav">   
             <a href="/">
                 <MudText Typo="Typo.h2" Class="mud-text-primary" Style="font-weight: bold;">Aiden Rogers</MudText>
             </a>
@@ -23,24 +27,24 @@
                     style="width: 250px; height: 250px;" />
             </MudPaper>
 
-            <MudText Typo="Typo.body1" style="margin-right: 15rem">
+            <MudText Typo="Typo.body1">
                 Software Engineer <span style="color: gold;"> | </span> Building efficient, user-friendly, and accessible applications.
             </MudText>
             <MudHidden Breakpoint="Breakpoint.SmAndDown">
-                <MudList class="mt-10 ">
+                <MudList class="mt-10 scroll-link-list">
                     <MudListItem>
-                        <a href="#about">
-                            <MudText Typo="Typo.body1">About</MudText>
+                        <a class="scroll-link" href="#about">
+                            <MudText class="title" Typo="Typo.body1">About</MudText>
                         </a>
                     </MudListItem>
                     <MudListItem>
-                        <a href="#experience">
-                            <MudText Typo="Typo.body1">Experience</MudText>
+                        <a class="scroll-link" href="#experience">
+                            <MudText class="title "Typo="Typo.body1">Experience</MudText>
                         </a>
                     </MudListItem>
                     <MudListItem>
-                        <a href="#projects">
-                            <MudText Typo="Typo.body1">Projects</MudText>
+                        <a class="scroll-link" href="#projects">
+                            <MudText class="title "Typo="Typo.body1">Projects</MudText>
                         </a>
                     </MudListItem>
                 </MudList>
@@ -92,6 +96,7 @@
 
             <MudText id="projects" Typo="Typo.h4" class="mt-5" Color="Color.Secondary">Projects</MudText>
             <MudText Typo="Typo.body1" class="mt-4">I have worked on a variety of projects, ranging from small personal projects to large group projects. Here are a few of my favourites:</MudText>
+
         </MudItem>
     </MudGrid>
 </MudContainer>
