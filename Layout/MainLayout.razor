@@ -9,24 +9,26 @@
 
     <MudAppBar Elevation="5" Style="opacity: 0.98">
 
-        @if( _page == "/")
+        @if (_page == "/")
         {
-        <MudButton href="/blog" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Blog</MudButton>
+            <MudButton href="/blog" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                TextColor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
         }
         else
         {
-        <MudButton href="/"  Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light">Home</MudButton>
+            <MudButton href="/" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light"
+                aria-label="Go to home button">Home</MudButton>
         }
 
 
         <MudSpacer />
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
-            Color="Color.Primary" OnClick="@ToggleDarkMode" />
+            Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
 
         <div style="width: 10px;"></div>
 
         @* Github icon with link *@
-        <MudLink Href="https://github.com/ACRonm" Target="_blank">
+        <MudLink Href="https://github.com/ACRonm" Target="_blank" aria-label="Go to my github">
             <MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" />
         </MudLink>
     </MudAppBar>
@@ -46,7 +48,7 @@
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
 
-    protected override void OnInitialized()  // Corrected here
+    protected override void OnInitialized() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
