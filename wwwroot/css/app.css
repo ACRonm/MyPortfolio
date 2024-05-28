@@ -22,6 +22,7 @@ h1:focus {
     outline: none;
 }
 
+
 ::selection {
     background: gold;
     /* Change to your preferred background color */
@@ -91,4 +92,20 @@ h1:focus {
     position: fixed;
     z-index: -1;
     backdrop-filter: blur(12vmax);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+    .inline-link:hover {
+        color: #CC9E00 !important;
+        /* Darker shade for dark mode */
+    }
+}
+
+/* Light mode */
+@media (prefers-color-scheme: light) {
+    .inline-link:hover {
+        color: #5E0101 !important;
+        /* Lighter shade for light mode */
+    }
 }
