@@ -96,7 +96,7 @@ h1:focus {
     top: 50%;
     translate: -50% -50%;
     border-radius: 50%;
-    background: linear-gradient(to right, red, gold);
+    background: linear-gradient(to right, rebeccapurple, green);
     animation: rotate 20s infinite;
     opacity: 0.8;
 }
