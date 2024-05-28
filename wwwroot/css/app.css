@@ -87,7 +87,7 @@ h1:focus {
 }
 
 #blob {
-    z-index: -1;
+    z-index: -99;
     background-color: white;
     height: 28vmax;
     aspect-ratio: 1;
