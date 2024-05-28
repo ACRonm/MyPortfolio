@@ -22,25 +22,16 @@ h1:focus {
     outline: none;
 }
 
-/* .inline-link {
-    transition: color 0.4s ease;
-}
-
-.inline-link:hover {
-    color: var(--hover-color) !important;
-} */
-
 .inline-link {
-    transition: color 0.4s ease, transform 0.4s ease;
+    transition: color 1s ease;
 }
 
 .inline-link:hover {
     color: var(--hover-color) !important;
-    transform: rotate(10deg) !important;
 }
 
 .scroll-link {
-    transition: color 0.7s ease 0s, background-color 0.7s ease 0s;
+    transition: color 1s ease;
 }
 
 .scroll-link:hover {
@@ -105,7 +96,7 @@ h1:focus {
     top: 50%;
     translate: -50% -50%;
     border-radius: 50%;
-    background: linear-gradient(to right, purple, gold);
+    background: linear-gradient(to right, red, gold);
     animation: rotate 20s infinite;
     opacity: 0.8;
 }
