@@ -48,11 +48,12 @@
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
 
-    protected override void OnInitialized() // Corrected here
+    protected override async Task OnInitializedAsync() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
+        await SetHoverColor();
     }
 
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -66,11 +67,19 @@
     void ToggleDarkMode()
     {
         _isDarkMode = !_isDarkMode;
+        _ = SetHoverColor();
+
     }
 
     void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;
+    }
+    private async Task SetHoverColor()
+    {
+        string script = _isDarkMode ? "document.documentElement.style.setProperty('--hover-color', '#FFD633');" :
+        "document.documentElement.style.setProperty('--hover-color', '#5E0101');";
+        await JSRuntime.InvokeVoidAsync("eval", script);
     }
 
     MudTheme CustomTheme = new MudTheme()
