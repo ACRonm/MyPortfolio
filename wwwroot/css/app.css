@@ -22,16 +22,25 @@ h1:focus {
     outline: none;
 }
 
-.inline-link {
+/* .inline-link {
     transition: color 0.4s ease;
 }
 
 .inline-link:hover {
     color: var(--hover-color) !important;
+} */
+
+.inline-link {
+    transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.inline-link:hover {
+    color: var(--hover-color) !important;
+    transform: rotate(10deg) !important;
 }
 
 .scroll-link {
-    transition: color 0.4s ease;
+    transition: color 0.7s ease 0s, background-color 0.7s ease 0s;
 }
 
 .scroll-link:hover {
