@@ -2,6 +2,9 @@
 
 @inject NavigationManager NavManager
 @inject IJSRuntime JSRuntime
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@using Microsoft.AspNetCore.Components.Authorization
 
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
 
@@ -69,7 +72,9 @@
 
     protected override async Task OnInitializedAsync() // Corrected here
     {
-            
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+
+        isLoggedIn = authState.User.Identity.IsAuthenticated;
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
