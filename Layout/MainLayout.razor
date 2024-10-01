@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavManager
 @inject IJSRuntime JSRuntime
 
@@ -21,8 +22,6 @@
         }
 
         <MudSpacer />
-
-
 
         @if (isLoggedIn)
         {
@@ -71,6 +70,10 @@
 
     protected override async Task OnInitializedAsync() // Corrected here
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if(authState.User.Identity is not null && user.Identity.IsAuthenticated)
+            isLoggedIn = true;
+            
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
