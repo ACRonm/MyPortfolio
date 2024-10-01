@@ -20,8 +20,22 @@
                 aria-label="Go to home button">Home</MudButton>
         }
 
-
         <MudSpacer />
+
+
+
+        @if (isLoggedIn)
+        {
+            <MudButton href="/.auth/logout" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                       TextColor="Color.Light" aria-label="Logout button">Logout</MudButton>
+        }
+        else
+        {
+            <MudButton href="/.auth/login/github" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                       TextColor="Color.Light" aria-label="Login with GitHub button">Login with GitHub</MudButton>
+        }
+
+
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
             Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
 
@@ -53,6 +67,7 @@
     string? _page;
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
+    private bool isLoggedIn = false;
 
     protected override async Task OnInitializedAsync() // Corrected here
     {

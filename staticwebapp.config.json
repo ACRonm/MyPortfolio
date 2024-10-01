@@ -1,5 +1,19 @@
 {
     "navigationFallback": {
         "rewrite": "/index.html"
+    },
+  "responseOverrides": {
+    "401": {
+      "redirect": "/.auth/login/github?post_login_redirect_uri=.referrer",
+      "statusCode": 302
     }
-} 
+  },
+  "auth": {
+    "identityProviders": {
+      "github": {
+        "clientId": "GITHUB_CLIENT_ID",
+        "clientSecret": "GITHUB_CLIENT_SECRET"
+      }
+    }
+}
+}
