@@ -11,8 +11,10 @@
   "auth": {
     "identityProviders": {
       "github": {
-        "clientId": "GITHUB_CLIENT_ID",
-        "clientSecret": "GITHUB_CLIENT_SECRET"
+        "registration": {
+          "clientIdSettingName": "GITHUB_CLIENT_ID",
+          "clientSecretSettingName": "GITHUB_CLIENT_SECRET"
+        }
       }
     }
 }
