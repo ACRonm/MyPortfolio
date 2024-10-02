@@ -50,7 +50,6 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 
     private async Task<string> GetTokenAsync()
     {
-        // Replace with your logic to get the token
         return await Task.FromResult<string>(null);
     }
 }
