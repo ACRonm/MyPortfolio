@@ -27,7 +27,11 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
         request.Headers.UserAgent.ParseAdd("request");
 
+        Console.WriteLine("Requesting user info...");
+
         var response = await _httpClient.SendAsync(request);
+
+        Console.WriteLine(response.StatusCode);
 
         if (response.IsSuccessStatusCode)
         {
