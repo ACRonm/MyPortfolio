@@ -73,6 +73,9 @@
 
     protected override async Task OnInitializedAsync() // Corrected here
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        isLoggedIn = authState.User.Identity.IsAuthenticated;
+
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
