@@ -13,8 +13,12 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         _httpClient = httpClient;
     }
 
+    public 
+
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
+        Console.WriteLine("Getting authentication state...");
+
         // Replace with your logic to get the token
         var token = await GetTokenAsync();
 
