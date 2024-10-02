@@ -13,8 +13,6 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         _httpClient = httpClient;
     }
 
-    public 
-
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         Console.WriteLine("Getting authentication state...");
