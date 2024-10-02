@@ -76,7 +76,7 @@
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         isLoggedIn = authState.User.Identity.IsAuthenticated;
         
-        Console.WriteLine("User is authenticated: ",isLoggedIn);
+        Console.WriteLine(isLoggedIn);
 
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
