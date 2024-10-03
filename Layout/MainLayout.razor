@@ -36,7 +36,7 @@
         else
         {
             <MudButton Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                       TextColor="Color.Light" aria-label="Login with GitHub button" OnClick="@LoginWithGitHub">Login with GitHub</MudButton>
+                       TextColor="Color.Light" aria-label="Login with GitHub button" OnClick="LoginWithGitHub">Login with GitHub</MudButton>
         }
 
 
@@ -97,9 +97,11 @@
 
     private async Task LoginWithGitHub()
     {
-        Console.WriteLine("Logging in with GitHub");
-        NavManager.NavigateTo("/.auth/login/github");
-    }
+        var authStateProvider = (CustomAuthStateProvider)AuthStateProvider;
+        authStateProvider.NotifyAuthenticationStateChanged();
+        // Redirect to GitHub login
+        NavigationManager.NavigateTo("/.auth/login/github");
+    }    }
 
     void ToggleDarkMode()
     {
