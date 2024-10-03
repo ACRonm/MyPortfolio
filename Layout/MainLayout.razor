@@ -35,7 +35,7 @@
         }
         else
         {
-            <MudButton OnClick="@LoginWithGitHub" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+            <MudButton href="/.auth/login/github" OnClick="@LoginWithGitHub" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
                        TextColor="Color.Light" aria-label="Login with GitHub button">Login with GitHub</MudButton>
         }
 
@@ -99,8 +99,6 @@
     {
         var authStateProvider = (CustomAuthStateProvider)AuthenticationStateProvider;
         authStateProvider.NotifyUserAuthentication();
-        // Redirect to GitHub login
-        NavManager.NavigateTo("/.auth/login/github");
     }
 
 
