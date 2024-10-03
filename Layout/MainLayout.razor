@@ -29,8 +29,6 @@
 
         <MudSpacer />
 
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
             Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
 
@@ -46,8 +44,6 @@
     </MudMainContent>
 </MudLayout>
 <script src="./javascript/blob.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="/javascript/google-signin.js"></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM2EP5ENP1"></script>
@@ -68,12 +64,6 @@
 
     protected override async Task OnInitializedAsync() // Corrected here
     {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        isLoggedIn = authState.User.Identity.IsAuthenticated;
-
-
-        Console.WriteLine(isLoggedIn);
-
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
@@ -86,12 +76,6 @@
         _page = uri.AbsolutePath;
 
         StateHasChanged();
-    }
-
-    private void LoginWithGitHub()
-    {
-        var authStateProvider = (CustomAuthStateProvider)AuthenticationStateProvider;
-        authStateProvider.NotifyUserAuthentication();
     }
 
 

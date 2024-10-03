@@ -1,27 +1,5 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html"
-  },
-  "responseOverrides": {
-    "401": {
-      "redirect": "/.auth/login/github?post_login_redirect_uri=https://aidenr.dev",
-      "statusCode": 302
-    }
-  },
-  "auth": {
-    "identityProviders": {
-      "github": {
-        "registration": {
-          "clientIdSettingName": "GITHUB_CLIENT_ID",
-          "clientSecretSettingName": "GITHUB_CLIENT_SECRET"
-        }
-      },
-      "google": {
-        "registration": {
-          "clientIdSettingName": "GOOGLE_CLIENT_ID",
-          "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
-        }
-      }
-    }
   }
 }
