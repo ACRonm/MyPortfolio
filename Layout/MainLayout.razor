@@ -97,11 +97,11 @@
 
     private async Task LoginWithGitHub()
     {
-        var authStateProvider = (CustomAuthStateProvider)AuthStateProvider;
-        authStateProvider.NotifyAuthenticationStateChanged();
+        var authStateProvider = (CustomAuthStateProvider)AuthenticationStateProvider;
+        authStateProvider.NotifyUserAuthentication();
         // Redirect to GitHub login
-        NavigationManager.NavigateTo("/.auth/login/github");
-    }    }
+        NavManager.NavigateTo("/.auth/login/github");
+    }
 
     void ToggleDarkMode()
     {

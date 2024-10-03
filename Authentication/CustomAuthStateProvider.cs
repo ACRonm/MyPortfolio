@@ -12,7 +12,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
         return Task.FromResult(new AuthenticationState(user));
     }
 
-    public void NotifyAuthenticationStateChanged()
+    public void NotifyUserAuthentication()
     {
         var identity = new ClaimsIdentity(new[]
         {
