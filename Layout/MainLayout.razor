@@ -95,12 +95,12 @@
         StateHasChanged();
     }
 
-    private async Task LoginWithGitHub()
+    private void LoginWithGitHub()
     {
         var authStateProvider = (CustomAuthStateProvider)AuthenticationStateProvider;
         authStateProvider.NotifyUserAuthentication();
         // Redirect to GitHub login
-        await Task.Run(() => NavManager.NavigateTo("/.auth/login/github?post_login_redirect_uri=/"));
+        NavManager.NavigateTo("/.auth/login/github?post_login_redirect_uri=/");
     }
 
 
