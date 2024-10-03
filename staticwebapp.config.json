@@ -17,5 +17,15 @@
         }
       }
     }
-  }
+  },
+    "routes": [
+      {
+          "route": "/login",
+          "allowedRoles": ["authenticated"]
+      },
+      {
+          "route": "/",
+          "allowedRoles": ["anonymous", "authenticated"]
+      }
+  ]
 }
