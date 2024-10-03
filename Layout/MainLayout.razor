@@ -100,7 +100,8 @@
         var authStateProvider = (CustomAuthStateProvider)AuthenticationStateProvider;
         authStateProvider.NotifyUserAuthentication();
         // Redirect to GitHub login
-        NavManager.NavigateTo("/.auth/login/github");
+        NavManager.NavigateTo("/.auth/login/github?post_login_redirect_uri=/");
+
     }
 
     void ToggleDarkMode()
