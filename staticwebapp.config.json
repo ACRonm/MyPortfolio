@@ -15,17 +15,13 @@
           "clientIdSettingName": "GITHUB_CLIENT_ID",
           "clientSecretSettingName": "GITHUB_CLIENT_SECRET"
         }
+      },
+      "google": {
+        "registration": {
+          "clientIdSettingName": "GOOGLE_CLIENT_ID",
+          "clientSecretSettingName": "GOOGLE_CLIENT_SECRET"
+        }
       }
     }
-  },
-  "routes": [
-    {
-      "route": "/login",
-      "redirect": "/.auth/login/github"
-    },
-    {
-      "route": "/logout",
-      "redirect": "/.auth/logout"
-    }
-  ]
+  }
 }

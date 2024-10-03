@@ -1,0 +1,16 @@
+@page "/authentication/success"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager Navigation
+
+<h3>Sign In Successful</h3>
+
+<p>Welcome back! You have successfully signed in.</p>
+
+<button @onclick="GoToHomePage">Go to Home Page</button>
+
+@code {
+    private void GoToHomePage()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

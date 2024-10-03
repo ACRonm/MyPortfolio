@@ -28,17 +28,7 @@
 
         <MudSpacer />
 
-        @if (isLoggedIn)
-        {
-            <MudButton href="/.auth/logout" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                       TextColor="Color.Light" aria-label="Logout button">Logout</MudButton>
-        }
-        else
-        {
-            <MudButton href="/.auth/login/github" OnClick="@LoginWithGitHub" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                       TextColor="Color.Light" aria-label="Login with GitHub button">Login with GitHub</MudButton>
-        }
-
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
             Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
@@ -55,6 +45,7 @@
     </MudMainContent>
 </MudLayout>
 <script src="./javascript/blob.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM2EP5ENP1"></script>

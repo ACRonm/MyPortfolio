@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Components.Web;
-
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-using MyPortfolio;
 using MudBlazor.Services;
+using MyPortfolio;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -16,8 +14,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddAuthorizationCore();
 
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>(); 
-
-builder.Services.AddApiAuthorization();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 await builder.Build().RunAsync();
