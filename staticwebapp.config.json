@@ -4,7 +4,7 @@
   },
   "responseOverrides": {
     "401": {
-      "redirect": "/.auth/login/github?post_login_redirect_uri=/",
+      "redirect": "/.auth/login/github?post_login_redirect_uri=https://aidenr.dev",
       "statusCode": 302
     }
   },
@@ -17,5 +17,15 @@
         }
       }
     }
-  }
+  },
+  "routes": [
+    {
+      "route": "/login",
+      "redirect": "/.auth/login/github"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout"
+    }
+  ]
 }
