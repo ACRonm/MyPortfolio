@@ -1,6 +1,6 @@
 {
-  "name": "MyBlazorPwa",
-  "short_name": "MyBlazorPwa",
+  "name": "Aiden's Portfolio",
+  "short_name": "Aiden's Portfolio",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
