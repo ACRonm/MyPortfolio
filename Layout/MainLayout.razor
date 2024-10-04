@@ -57,7 +57,6 @@
 
     string? _page;
     private bool _isDarkMode = true;
-    private bool _drawerOpen = false;
     protected override async Task OnInitializedAsync() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
@@ -65,26 +64,17 @@
         NavManager.LocationChanged += HandleLocationChanged;
         await SetHoverColor();
     }
-
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var uri = new Uri(e.Location);
         _page = uri.AbsolutePath;
-
         StateHasChanged();
     }
-
-
     void ToggleDarkMode()
     {
         _isDarkMode = !_isDarkMode;
         _ = SetHoverColor();
 
-    }
-
-    void ToggleDrawer()
-    {
-        _drawerOpen = !_drawerOpen;
     }
     private async Task SetHoverColor()
     {
