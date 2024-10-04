@@ -4,12 +4,10 @@
 
 @inject NavigationManager NavManager
 @inject IJSRuntime JSRuntime
-@inject AuthenticationStateProvider AuthenticationStateProvider
-
-@using Microsoft.AspNetCore.Components.Authorization
 
 <meta name="google-signin-client_id" content="819755741420-tltmas5v1k7iqsvl0du3d2e6rotcul87.apps.googleusercontent.com">
 
+<MudPopoverProvider />
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
 
 <MudLayout style="overflow: hidden;">
@@ -18,12 +16,12 @@
 
         @if (_page == "/")
         {
-            <MudButton href="/blog" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                TextColor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
+            <MudButton href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                textcolor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
         }
         else
         {
-            <MudButton href="/" Typo="Typo.Button" Variant="Variant.Outlined" Color="Color.Primary" TextColor="Color.Light"
+            <MudButton href="/" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary" textcolor="Color.Light"
                 aria-label="Go to home button">Home</MudButton>
         }
 
@@ -48,11 +46,11 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CM2EP5ENP1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-CM2EP5ENP1');
+    gtag('config', 'G-CM2EP5ENP1');
 </script>
 
 @code {
@@ -60,8 +58,6 @@
     string? _page;
     private bool _isDarkMode = true;
     private bool _drawerOpen = false;
-    private bool isLoggedIn = false;
-
     protected override async Task OnInitializedAsync() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
@@ -115,7 +111,7 @@
                 H4 = new H4() { FontSize = "1.5rem" }
             },
 
-            Palette = new PaletteLight()
+            PaletteLight = new PaletteLight()
             {
                 Background = "#f5f5f5",
                 Primary = "#8B0000",
