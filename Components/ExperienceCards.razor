@@ -1,0 +1,40 @@
+@page "/ExperienceCards"
+@using System.Diagnostics.Tracing
+
+<div class="experience-cards">
+<MudPaper Elevation="3" class="mb-6 experience-card" style="padding:1rem; background-color:#1A1A27; position:relative;" @onpointerover="HandlePointerOver">
+    <a href="https://cogitogroup.net" target="_blank">
+    <MudGrid>
+        <MudItem xs="3" class="experience-card-date">
+            <MudText>
+                2024 - Present
+            </MudText>
+            
+        </MudItem>
+        <MudItem xs="9">
+            <MudText class="experience-card-header">
+                Cogito Group
+            </MudText>
+            <MudText class="experience-card-info">
+                <MudText Typo="Typo.body1" class="mb-3">Consectetur in voluptate non culpa non consectetur enim in elit
+                    ullamco
+                    in.
+                </MudText>
+                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">React</MudChip>
+                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Javascript</MudChip>
+                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Go</MudChip>
+            </MudText>
+        </MudItem>
+    </MudGrid>
+    <MudIconButton Icon="@Icons.Material.Filled.OpenInNew" Color="Color.Primary" class="external-link-icon" style="position:absolute; top:0.2rem; right:0.2rem; font-size:0.75rem;" />
+    </a>
+</MudPaper>
+</div
+@code {
+
+    private void HandlePointerOver()
+    {
+
+    }
+
+}
