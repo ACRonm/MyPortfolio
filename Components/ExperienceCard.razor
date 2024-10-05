@@ -1,19 +1,22 @@
 @page "/test"
+@using System.Diagnostics.Tracing
 
-<MudPaper Elevation="3" class="experience-card" style="">
+<MudPaper Elevation="3" class="experience-card" style="padding: 1rem" @onpointerover="HandlePointerOver">
     <MudGrid>
-        <MudItem xs="3">
+        <MudItem xs="3" class="experience-card-date">
+            <MudText>
+                2024 - Present
+            </MudText>
         </MudItem>
         <MudItem xs="9">
-            <header class="experience-card-header" style="padding:0;!important">
-                <MudText Typo="Typo.h5">Test Page</MudText>
-            </header>
-            <MudText>
-                <MudText Typo="Typo.body1">This is a test page.</MudText>
-                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
-                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
-                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
-                <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
+            <MudText class="experience-card-header">
+                Test Page
+            </MudText>
+            <MudText class="experience-card-info">
+                <MudText Typo="Typo.body2" class="">Consectetur in voluptate non culpa non consectetur enim in elit
+                    ullamco
+                    in.
+                </MudText>
                 <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
                 <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
                 <MudChip T="string" Variant="Variant.Text" Color="Color.Warning">Warning</MudChip>
@@ -21,3 +24,12 @@
         </MudItem>
     </MudGrid>
 </MudPaper>
+
+@code {
+
+    private void HandlePointerOver()
+    {
+
+    }
+
+}

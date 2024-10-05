@@ -8,7 +8,7 @@
 <MudPopoverProvider />
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
 
-<MudLayout style="overflow: hidden;">
+<MudLayout style="">
 
     <MudAppBar Elevation="5">
 
@@ -96,7 +96,8 @@
                 H1 = new H1() { FontSize = "2.5rem" },
                 H2 = new H2() { FontSize = "2rem" },
                 H3 = new H3() { FontSize = "1.75rem" },
-                H4 = new H4() { FontSize = "1.5rem" }
+                H4 = new H4() { FontSize = "1.5rem" },
+                Body2 = new Body2() { FontSize = "small" },
             },
 
             PaletteLight = new PaletteLight()

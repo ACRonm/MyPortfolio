@@ -1,5 +1,7 @@
-.mud-card-header {
-    background-color: #f8f9fa;
+.experience-card-header {
+    font-size: small !important;
+}
+
+#experience-card-info {
     padding: 0 !important;
-    border-bottom: 1px solid #dee2e6;
 }

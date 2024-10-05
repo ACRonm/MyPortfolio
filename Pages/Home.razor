@@ -1,5 +1,6 @@
 ﻿@using MudBlazor
 @using MudBlazor.Services
+@using MyPortfolio.Components
 
 @inject IJSRuntime JSRuntime
 
@@ -10,7 +11,7 @@
 @* row *@
 <MudContainer>
     <MudGrid id="portfolio-columns">
-        <MudItem id="profile-picture" sm="12" md="6" class="sidebar-nav">
+        <MudItem id="profile-picture" sm="12" md="5" class="sidebar-nav sticky" Style="">
             <a href="/">
                 <MudText Typo="Typo.h1" Class="mud-text-primary" Style="font-weight: bold;">Aiden Rogers</MudText>
             </a>
@@ -21,11 +22,11 @@
                     style="width: 250px; height: 250px;" />
             </MudPaper>
 
-            <MudText Typo="Typo.body1">
-                Software Engineer <span style="color: var(--hover-color);"> | </span> Building efficient, user-friendly,
-                and
-                accessible applications.
-            </MudText>
+            @* <MudText Typo="Typo.body1">
+            Software Engineer <span style="color: var(--hover-color);"> | </span> Building efficient, user-friendly,
+            and
+            accessible applications.
+            </MudText> *@
             <MudHidden Breakpoint="Breakpoint.SmAndDown">
                 <MudList T="string" class="mt-10 scroll-link-list">
                     <MudListItem>
@@ -96,7 +97,6 @@
 
             <MudText id="projects" Typo="Typo.h3" class="mt-5" Color="Color.Secondary">Projects</MudText>
             <MudText Typo="Typo.body1" class="mt-4">Coming Soon!</MudText>
-
         </MudItem>
     </MudGrid>
 </MudContainer>

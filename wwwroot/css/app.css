@@ -114,5 +114,4 @@ h1:focus {
     position: fixed;
     z-index: -1;
     backdrop-filter: blur(12vmax);
-    overflow: hidden;
 }

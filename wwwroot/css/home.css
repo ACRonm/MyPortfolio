@@ -1,0 +1,4 @@
+.sidebar-nav {
+    max-height: min-content;
+    top: 64px;
+}
