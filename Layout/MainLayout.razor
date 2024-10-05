@@ -5,8 +5,6 @@
 @inject NavigationManager NavManager
 @inject IJSRuntime JSRuntime
 
-<meta name="google-signin-client_id" content="819755741420-tltmas5v1k7iqsvl0du3d2e6rotcul87.apps.googleusercontent.com">
-
 <MudPopoverProvider />
 <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
 
@@ -37,7 +35,7 @@
             <MudIcon Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" />
         </MudLink>
     </MudAppBar>
-    <MudMainContent>
+    <MudMainContent class="mt-5">
         @Body
     </MudMainContent>
 </MudLayout>
