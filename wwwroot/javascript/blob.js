@@ -6,6 +6,6 @@ window.onpointermove = event => {
     blob.animate({
         left: `${clientX}px`,
         top: `${clientY}px`
-    }, { duration: 3000, fill: "forwards" });
+    }, { duration: 1000, fill: "forwards" });
 
 }
