@@ -1,6 +1,6 @@
 ﻿@using MudBlazor
 @using MudBlazor.Services
-@using MyPortfolio.Components
+@using MyPortfolio.Components.ExperienceCards
 
 @inject IJSRuntime JSRuntime
 
@@ -11,22 +11,21 @@
 @* row *@
 <MudContainer>
     <MudGrid id="portfolio-columns">
-        <MudItem id="profile-picture" sm="12" md="5" class="sidebar-nav">
+        <MudItem id="profile-picture" sm="12" md="5" class="sidebar-nav pr-20">
             <a href="/">
                 <MudText Typo="Typo.h1" Class="mud-text-primary" Style="font-weight: bold;">Aiden Rogers</MudText>
             </a>
-            <MudText Typo="Typo.h2">Graduate Software Engineer</MudText>
+            <MudText Typo="Typo.h2">Junior DevOps Engineer</MudText>
             <MudPaper Elevation="15" Class="mud-elevation-3 rounded-circle my-4" Style="width: 250px; height:
             250px;">
                 <img src="images/me.avif" alt="Aiden Rogers" class="rounded-circle"
                     style="width: 250px; height: 250px;" />
             </MudPaper>
 
-            @* <MudText Typo="Typo.body1">
-            Software Engineer <span style="color: var(--hover-color);"> | </span> Building efficient, user-friendly,
-            and
-            accessible applications.
-            </MudText> *@
+            <MudText Typo="Typo.body1" class="">
+                Software Engineer <span style="color: var(--hover-color);"> | </span> Building efficient, user-friendly,
+                and accessible applications.
+            </MudText>
             <MudHidden Breakpoint="Breakpoint.SmAndDown">
                 <MudList T="string" class="mt-10 scroll-link-list">
                     <MudListItem>

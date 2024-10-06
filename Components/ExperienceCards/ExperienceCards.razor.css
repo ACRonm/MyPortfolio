@@ -1,0 +1,43 @@
+::deep .experience-card {
+    /* padding: 1rem; */
+    position: relative;
+}
+
+::deep .experience-card {
+    /* padding: 1rem; */
+    position: relative;
+    background-color: rgba(26, 26, 39, 0);
+    border: 1px solid rgba(255, 255, 255, 0);
+    box-shadow: none;
+}
+
+::deep .experience-card {
+    transition: background-color 0.1s ease, border 0.1s ease, box-shadow 0.1s ease;
+}
+
+::deep .experience-card:hover {
+    background-color: rgba(26, 26, 39, 0.3);
+    /* 0.1 is the alpha value for 10% opacity */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+::deep .experience-card-header,
+::deep .experience-card-icon {
+    transition: color 0.1s ease, top 0.1s ease, right 0.1s ease;
+}
+
+::deep .experience-card:hover .experience-card-header,
+::deep .experience-card:hover .experience-card-icon {
+    color: #FFC701;
+    /* Change this to your desired color */
+}
+
+::deep .experience-card-header {
+    font-weight: bold;
+}
+
+::deep .experience-card-icon {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
