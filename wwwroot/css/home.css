@@ -1,4 +1,7 @@
-.sidebar-nav {
-    max-height: min-content;
-    top: 64px;
+@media (min-width: 960px) {
+    .sidebar-nav {
+        position: sticky;
+        max-height: min-content;
+        top: 64px;
+    }
 }
