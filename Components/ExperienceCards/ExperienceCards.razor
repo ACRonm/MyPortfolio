@@ -1,8 +1,11 @@
 @page "/ExperienceCards"
 @using System.Diagnostics.Tracing
 
+@inject MudTheme CustomTheme
+
 <div class="experience-cards">
-    <MudPaper id="card1" class="experience-card rounded-lg px-5 py-4 mb-6">
+    <MudPaper id="card1" class="experience-card rounded-lg px-5 py-4 mb-6" @onmouseover="HandleMouseOver"
+        @onmouseleave="HandleMouseLeave" Style="@( $"background-color: {backgroundColor};")">
         <a href="https://cogitogroup.net" target="_blank">
             <MudGrid>
                 <MudItem xs="3" class="experience-card-date">
@@ -12,11 +15,11 @@
 
                 </MudItem>
                 <MudItem xs="9">
-                    <MudText class="experience-card-header">
+                    <MudText class="experience-card-header" Style="@($"color: {color};")">
                         Devops Engineer at Cogito Group
                     </MudText>
                     <MudText class="experience-card-info">
-                        <MudText Typo="Typo.body1" class="mb-3">Consectetur in voluptate non culpa non consectetur enim
+                        <MudText class="mb-3">Consectetur in voluptate non culpa non consectetur enim
                             in elit
                             ullamco
                             in.
@@ -27,17 +30,54 @@
                     </MudText>
                 </MudItem>
             </MudGrid>
-            <MudIcon Icon="@Icons.Material.Filled.OpenInNew" Size="Size.Small" Class="experience-card-icon" />
+            <MudIcon Icon="@Icons.Material.Filled.ArrowOutward" Size="Size.Small" Class="experience-card-icon"
+                Style="@( $"color: {color}; " )" />
         </a>
     </MudPaper>
 </div>
 
 @code {
-    private string? hoveredCardId;
+    private bool _isDarkMode;
+    private string? color;
+    private string? backgroundColor;
 
-    private void OnMouseOver(string cardId)
+    [CascadingParameter]
+    public bool IsDarkMode
     {
-        hoveredCardId = cardId;
-        Console.WriteLine("Hovered");
+        get => _isDarkMode;
+        set
+        {
+            if (_isDarkMode != value)
+            {
+                _isDarkMode = value;
+                UpdateColor();
+            }
+        }
+    }
+
+    private void HandleMouseOver()
+    {
+        var palette = GetPalette();
+        color = palette.Primary.ToString();
+        backgroundColor = palette.Tertiary.ToString();
+    }
+
+    private void HandleMouseLeave()
+    {
+        var palette = GetPalette();
+        color = palette.TextPrimary.ToString();
+        backgroundColor = "rgba(45,40,38,0)";
+    }
+
+    private void UpdateColor()
+    {
+        var palette = GetPalette();
+        color = palette.TextPrimary.ToString();
+        backgroundColor = null;
+    }
+
+    private Palette GetPalette()
+    {
+        return _isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
     }
 }

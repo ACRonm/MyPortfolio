@@ -16,20 +16,7 @@
 }
 
 ::deep .experience-card:hover {
-    background-color: rgba(26, 26, 39, 0.3);
-    /* 0.1 is the alpha value for 10% opacity */
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-::deep .experience-card-header,
-::deep .experience-card-icon {
-    transition: color 0.1s ease, top 0.1s ease, right 0.1s ease;
-}
-
-::deep .experience-card:hover .experience-card-header,
-::deep .experience-card:hover .experience-card-icon {
-    color: #FFC701;
-    /* Change this to your desired color */
 }
 
 ::deep .experience-card-header {
@@ -38,6 +25,13 @@
 
 ::deep .experience-card-icon {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 1rem;
+    right: 1rem;
+    transition: transform 0.3s ease-in-out;
+    /* Add transition for transform */
+}
+
+::deep .experience-card:hover .experience-card-icon {
+    transform: translate(10px, -10px);
+    /* Move up and right on hover */
 }

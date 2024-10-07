@@ -93,7 +93,9 @@
             </MudText>
 
             <MudText id="experience" Typo="Typo.h3" class="mt-5 mb-5" Color="Color.Secondary">Experience</MudText>
-            <ExperienceCards></ExperienceCards>
+            <CascadingValue Value="_isDarkMode">
+                <ExperienceCards></ExperienceCards>
+            </CascadingValue>
             <MudText id="projects" Typo="Typo.h3" class="mt-5" Color="Color.Secondary">Projects</MudText>
             <MudText Typo="Typo.body1" class="mt-4">Coming Soon!</MudText>
         </MudItem>
@@ -103,4 +105,6 @@
 
 @code {
 
+    [CascadingParameter]
+    public bool _isDarkMode { get; set; }
 }
