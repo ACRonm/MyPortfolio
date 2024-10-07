@@ -38,12 +38,10 @@ h1:focus {
     color: var(--hover-color) !important;
 }
 
-::selection {
+/* ::selection {
     background: gold;
-    /* Change to your preferred background color */
     color: #000;
-    /* Change to your preferred text color */
-}
+} */
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
