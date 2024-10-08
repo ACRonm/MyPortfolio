@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using MyPortfolio;
 using MyPortfolio.Themes;
-using Microsoft.Extensions.Configuration;
 using MudBlazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
