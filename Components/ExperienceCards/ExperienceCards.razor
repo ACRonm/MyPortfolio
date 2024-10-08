@@ -6,27 +6,23 @@
 <div class="experience-cards">
     <MudPaper id="card1" class="experience-card rounded-lg px-5 py-4 mb-6" @onmouseover="HandleMouseOver"
         @onmouseleave="HandleMouseLeave" Style="@( $"background-color: {backgroundColor};")">
-        <a href="https://cogitogroup.net" target="_blank">
+        <a href="@Url" target="_blank">
             <MudGrid>
                 <MudItem xs="3" class="experience-card-date">
                     <MudText>
-                        2024 - Present
+                        @DateRange
                     </MudText>
-
                 </MudItem>
                 <MudItem xs="9">
                     <MudText class="experience-card-header" Style="@($"color: {color};")">
-                        Devops Engineer at Cogito Group
+                        @Title
                     </MudText>
                     <MudText class="experience-card-info">
-                        <MudText class="mb-3">Consectetur in voluptate non culpa non consectetur enim
-                            in elit
-                            ullamco
-                            in.
-                        </MudText>
-                        <MudChip T="string" Variant="Variant.Text" Color="Color.Primary">React</MudChip>
-                        <MudChip T="string" Variant="Variant.Text" Color="Color.Primary">Javascript</MudChip>
-                        <MudChip T="string" Variant="Variant.Text" Color="Color.Primary">Go</MudChip>
+                        <MudText class="mb-3">@Description</MudText>
+                        @foreach (var skill in Skills)
+                        {
+                            <MudChip T="string" Variant="Variant.Text" Color="Color.Primary">@skill</MudChip>
+                        }
                     </MudText>
                 </MudItem>
             </MudGrid>
@@ -40,6 +36,21 @@
     private bool _isDarkMode;
     private string? color;
     private string? backgroundColor;
+
+    [Parameter]
+    public string Url { get; set; } = string.Empty;
+
+    [Parameter]
+    public string DateRange { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public List<string> Skills { get; set; } = new List<string>();
 
     [CascadingParameter]
     public bool IsDarkMode
