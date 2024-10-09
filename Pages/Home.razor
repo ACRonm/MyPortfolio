@@ -96,14 +96,15 @@
             <CascadingValue Value="_isDarkMode">
                 @page "/Experience"
 
-                <ExperienceCards Url="https://cogitogroup.net" DateRange="2024 - Present"
+                <ExperienceCard Url="https://cogitogroup.net" DateRange="2024 - Present"
                     Title="Devops Engineer at Cogito Group"
                     Description="Building enterprise solutions in the CA and PKI spaces. Experience in full-stack development, and automation."
                     Skills="@(new List<string> { "React", "Javascript", "Go" })" />
 
-                <ExperienceCards Url="https://github.com/ACRonm/Capstone_project_9785-24S1-18" DateRange="2023 - 2023"
+                <ExperienceCard Url="https://github.com/ACRonm/Capstone_project_9785-24S1-18" DateRange="2023 - 2023"
                     Title="University Capstone Project with the ABS"
-                    Description="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
+                    Description
+                    ="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
                     Skills="@(new List<string> { "C#", "Azure", "Blazor" })" />
             </CascadingValue>
             <MudText id="projects" Typo="Typo.h3" class="mt-5" Color="Color.Secondary">Projects</MudText>
