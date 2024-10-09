@@ -1,0 +1,23 @@
+@page "/blogpost"
+@using System
+
+<div class="blog-post">
+    <h2>@Title</h2>
+    <p>@Date.ToShortDateString()</p>
+    <img src="@ImageUrl" alt="Blog post image" />
+    <p>@Content</p>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = "Default Title";
+
+    [Parameter]
+    public DateTime Date { get; set; } = DateTime.Now;
+
+    [Parameter]
+    public string ImageUrl { get; set; } = "https://images.unsplash.com/photo-1486825586573-7131f7991bdd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVzdHxlbnwwfHwwfHx8MA%3D%3D";
+
+    [Parameter]
+    public string Content { get; set; } = "Default content of the blog post.";
+}
