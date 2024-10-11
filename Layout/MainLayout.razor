@@ -17,13 +17,13 @@
 
         @if (_page == "/")
         {
-                        <MudButton href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                        textcolor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
+            <MudButton href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                textcolor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
         }
         else
         {
-                        <MudButton href="/" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary" textcolor="Color.Light"
-                        aria-label="Go to home button">Home</MudButton>
+            <MudButton href="/" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary" textcolor="Color.Light"
+                aria-label="Go to home button">Home</MudButton>
         }
 
         <MudSpacer />
@@ -36,7 +36,7 @@
         </a> *@
 
         <MudIconButton Icon="@(isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
-        Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
+            Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
 
         <div style="width: 10px;"></div>
 
