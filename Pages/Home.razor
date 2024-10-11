@@ -19,7 +19,7 @@
             <MudPaper Elevation="15" Class="mud-elevation-3 rounded-circle my-4" Style="width: 250px; height:
             250px;">
                 <img src="images/me.avif" alt="Aiden Rogers" class="rounded-circle"
-                    style="width: 250px; height: 250px;" />
+                style="width: 250px; height: 250px;" />
             </MudPaper>
 
             <MudText Typo="Typo.body1" class="">
@@ -52,7 +52,7 @@
             <MudText Typo="Typo.body1">Hi! I'm Aiden, a software engineer with a passion for building useful and
                 efficient applications. I have just graduated with a Bachelor's degree in Software Engineering at the
                 <MudLink class="inline-link" Href="https://www.canberra.edu.au/" Typo="Typo.body1" Color="Color.Primary"
-                    Underline="Underline.None" Target="_blank">University
+                Underline="Underline.None" Target="_blank">University
                     of Canberra</MudLink>, and I am
                 keen to start
                 building
@@ -93,19 +93,19 @@
             </MudText>
 
             <MudText id="experience" Typo="Typo.h3" class="mt-5 mb-5" Color="Color.Secondary">Experience</MudText>
-            <CascadingValue Value="_isDarkMode">
+            <CascadingValue Value="isDarkMode">
                 @page "/Experience"
 
                 <ExperienceCard Url="https://cogitogroup.net" DateRange="2024 - Present"
-                    Title="Devops Engineer at Cogito Group"
-                    Description="Building enterprise solutions in the CA and PKI spaces. Experience in full-stack development, and automation."
-                    Skills="@(new List<string> { "React", "Javascript", "Go" })" />
+                Title="Devops Engineer at Cogito Group"
+                Description="Building enterprise solutions in the CA and PKI spaces. Experience in full-stack development and automation."
+                Skills="@(new List<string> { "React", "Javascript", "Go" })" />
 
                 <ExperienceCard Url="https://github.com/ACRonm/Capstone_project_9785-24S1-18" DateRange="2023 - 2023"
-                    Title="University Capstone Project with the ABS"
-                    Description
-                    ="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
-                    Skills="@(new List<string> { "C#", "Azure", "Blazor" })" />
+                Title="University Capstone Project with the ABS"
+                Description
+                ="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
+                Skills="@(new List<string> { "C#", "Azure", "Blazor" })" />
             </CascadingValue>
             <MudText id="projects" Typo="Typo.h3" class="mt-5" Color="Color.Secondary">Projects</MudText>
             <MudText Typo="Typo.body1" class="mt-4">Coming Soon!</MudText>
@@ -117,5 +117,5 @@
 @code {
 
     [CascadingParameter]
-    public bool _isDarkMode { get; set; }
+    public bool isDarkMode { get; set; }
 }

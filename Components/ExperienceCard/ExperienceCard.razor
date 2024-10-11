@@ -33,7 +33,7 @@
 </div>
 
 @code {
-    private bool _isDarkMode;
+    private bool isDarkMode;
     private string? color;
     private string? backgroundColor;
 
@@ -55,12 +55,12 @@
     [CascadingParameter]
     public bool IsDarkMode
     {
-        get => _isDarkMode;
+        get => isDarkMode;
         set
         {
-            if (_isDarkMode != value)
+            if (isDarkMode != value)
             {
-                _isDarkMode = value;
+                isDarkMode = value;
                 UpdateColor();
             }
         }
@@ -89,6 +89,6 @@
 
     private Palette GetPalette()
     {
-        return _isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
+        return isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
     }
 }

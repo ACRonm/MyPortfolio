@@ -9,7 +9,7 @@
 
 
 <MudPopoverProvider />
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="CustomTheme" />
+<MudThemeProvider @bind-IsDarkMode="@isDarkMode" Theme="CustomTheme" />
 
 <MudLayout style="">
 
@@ -17,13 +17,13 @@
 
         @if (_page == "/")
         {
-            <MudButton href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-                textcolor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
+                        <MudButton href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+                        textcolor="Color.Light" aria-label="Go to blog button">Blog</MudButton>
         }
         else
         {
-            <MudButton href="/" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary" textcolor="Color.Light"
-                aria-label="Go to home button">Home</MudButton>
+                        <MudButton href="/" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary" textcolor="Color.Light"
+                        aria-label="Go to home button">Home</MudButton>
         }
 
         <MudSpacer />
@@ -35,8 +35,8 @@
         <MudButton Variant="Variant.Outlined" Color="Color.Primary">Log out</MudButton>
         </a> *@
 
-        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
-            Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
+        <MudIconButton Icon="@(isDarkMode ? Icons.Material.Outlined.Brightness7 : Icons.Material.Outlined.Brightness4)"
+        Color="Color.Primary" OnClick="@ToggleDarkMode" aria-label="Toggle colour theme" />
 
         <div style="width: 10px;"></div>
 
@@ -46,7 +46,7 @@
         </MudLink>
     </MudAppBar>
     <MudMainContent class="mt-5">
-        <CascadingValue Value="_isDarkMode">
+        <CascadingValue Value="isDarkMode">
             @Body
         </CascadingValue>
     </MudMainContent>
@@ -64,34 +64,25 @@
 </script>
 
 @code {
-
     string? _page;
-    public string style { get; set; } = "color: red;";
-    public bool _isDarkMode { get; set; } = true;
-    protected override async Task OnInitializedAsync() // Corrected here
+    public bool isDarkMode { get; set; } = true;
+    protected override void OnInitialized() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
         NavManager.LocationChanged += HandleLocationChanged;
-        await SetHoverColor();
     }
+
     private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
     {
         var uri = new Uri(e.Location);
         _page = uri.AbsolutePath;
         StateHasChanged();
     }
+
     void ToggleDarkMode()
     {
-        _isDarkMode = !_isDarkMode;
-        _ = SetHoverColor();
+        isDarkMode = !isDarkMode;
 
     }
-    private async Task SetHoverColor()
-    {
-        string script = _isDarkMode ? "document.documentElement.style.setProperty('--hover-color', '#FFD633');" :
-        "document.documentElement.style.setProperty('--hover-color', '#5E0101');";
-        await JSRuntime.InvokeVoidAsync("eval", script);
-    }
-
 }
