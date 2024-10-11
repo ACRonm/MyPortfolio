@@ -5,16 +5,19 @@
 
 <PageTitle>My Adventures</PageTitle>
 
-<MudContainer>
-    <MudGrid>
-        <MudItem sm="12" md="6">
-            <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-        <BlogPostTeaser></BlogPostTeaser>
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+<CascadingValue Value="currentPalette">
+    <MudContainer>
+        <MudGrid>
+            <MudItem sm="12" md="6">
+                <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
+                <BlogPostTeaser></BlogPostTeaser>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</CascadingValue>
 
 @code {
-
+    [CascadingParameter]
+    public Palette? currentPalette { get; set; }
 
 }

@@ -73,6 +73,7 @@
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
         _page = uri;
+        currentPalette = CustomTheme.PaletteDark;
         NavManager.LocationChanged += HandleLocationChanged;
     }
 
@@ -83,14 +84,15 @@
         StateHasChanged();
     }
 
-    private void GetCurrentPalette()
+    private void UpdatePalette()
     {
         currentPalette = isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
+        StateHasChanged();
     }
 
     void ToggleDarkMode()
     {
         isDarkMode = !isDarkMode;
-
+        UpdatePalette();
     }
 }

@@ -90,28 +90,19 @@
             </MudText>
 
             <MudText id="experience" Typo="Typo.h3" class="mt-5 mb-5" Color="Color.Secondary">Experience</MudText>
-            <CascadingValue Value="isDarkMode">
-                @page "/Experience"
+            @page "/Experience"
 
-                <ExperienceCard Url="https://cogitogroup.net" DateRange="2024 - Present"
-                    Title="Devops Engineer at Cogito Group"
-                    Description="Building enterprise solutions in the CA and PKI spaces. Experience in full-stack development and automation."
-                    Skills="@(new List<string> { "React", "Javascript", "Go" })" />
+            <ExperienceCard Url="https://cogitogroup.net" DateRange="2024 - Present"
+                Title="Devops Engineer at Cogito Group"
+                Description="Building enterprise solutions in the CA and PKI spaces. Experience in full-stack development and automation."
+                Skills="@(new List<string> { "React", "Javascript", "Go" })" />
 
-                <ExperienceCard Url="https://github.com/ACRonm/Capstone_project_9785-24S1-18" DateRange="2023 - 2023"
-                    Title="University Capstone Project with the ABS"
-                    Description="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
-                    Skills="@(new List<string> { "C#", "Azure", "Blazor" })" />
-            </CascadingValue>
+            <ExperienceCard Url="https://github.com/ACRonm/Capstone_project_9785-24S1-18" DateRange="2023 - 2023"
+                Title="University Capstone Project with the ABS"
+                Description="Developed a proof-of-concept address repair system in .NET. Complete with cloud-based storage and a Blazor front-end."
+                Skills="@(new List<string> { "C#", "Azure", "Blazor" })" />
             <MudText id="projects" Typo="Typo.h3" class="mt-5" Color="Color.Secondary">Projects</MudText>
             <MudText Typo="Typo.body1" class="mt-4">Coming Soon!</MudText>
         </MudItem>
     </MudGrid>
 </MudContainer>
-
-
-@code {
-
-    [CascadingParameter]
-    public bool isDarkMode { get; set; }
-}

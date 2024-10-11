@@ -33,7 +33,6 @@
 </div>
 
 @code {
-    private bool isDarkMode;
     private string? color;
     private string? backgroundColor;
 
@@ -53,42 +52,34 @@
     public List<string> Skills { get; set; } = new List<string>();
 
     [CascadingParameter]
-    public bool IsDarkMode
+    public Palette? currentPalette { get; set; }
+
+    protected override void OnParametersSet()
     {
-        get => isDarkMode;
-        set
-        {
-            if (isDarkMode != value)
-            {
-                isDarkMode = value;
-                UpdateColor();
-            }
-        }
+        // Ensure the component re-renders when currentPalette changes
+        base.OnParametersSet();
+        StateHasChanged();
+
+        if (currentPalette != null)
+            color = currentPalette.TextPrimary.ToString();
+
     }
 
     private void HandleMouseOver()
     {
-        var palette = GetPalette();
-        color = palette.Primary.ToString();
-        backgroundColor = palette.Tertiary.ToString();
+        if (currentPalette != null)
+        {
+            color = currentPalette.Primary.ToString();
+            backgroundColor = currentPalette.Tertiary.ToString();
+        }
     }
 
     private void HandleMouseLeave()
     {
-        var palette = GetPalette();
-        color = palette.TextPrimary.ToString();
-        backgroundColor = "rgba(45,40,38,0)";
-    }
-
-    private void UpdateColor()
-    {
-        var palette = GetPalette();
-        color = palette.TextPrimary.ToString();
-        backgroundColor = null;
-    }
-
-    private Palette GetPalette()
-    {
-        return isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
+        if (currentPalette != null)
+        {
+            color = currentPalette.TextPrimary.ToString();
+            backgroundColor = "rgba(45,40,38,0)";
+        }
     }
 }

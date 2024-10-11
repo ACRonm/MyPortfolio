@@ -1,12 +1,13 @@
 @page "/blogpostteaser"
 
-@using System.Net.Http  
+@using System.Net.Http
 @using System
+@using MyPortfolio.Themes
 
 @inject HttpClient Http
 
 
-<div class="blog-post-teaser">
+<div class="blog-post-teaser" @onmouseover="GetPalette">
     <h2>@Title</h2>
     <p>@Date.ToShortDateString()</p>
     <MudText Typo="Typo.body1">@((MarkupString)(content ?? errorMessage))</MudText>
@@ -25,6 +26,8 @@
     private string errorMessage = "Loading...";
     private string? markdownContent;
 
+    [CascadingParameter]
+    public Palette? currentPalette { get; set; }
     protected override async Task OnInitializedAsync()
     {
 
@@ -32,9 +35,7 @@
         {
             var markdown = await Http.GetStringAsync("/Blog/post1.md");
             markdownContent = Markdig.Markdown.ToHtml(markdown);
-
             content = TruncateText(markdownContent, 30);
-
         }
         catch (HttpRequestException)
         {
@@ -50,5 +51,10 @@
         if (words.Length <= wordLimit) return text;
 
         return string.Join(' ', words.Take(wordLimit)) + " [...]";
+    }
+
+    private void GetPalette()
+    {
+        Console.WriteLine("Palette updated" + currentPalette);
     }
 }
