@@ -47,7 +47,9 @@
     </MudAppBar>
     <MudMainContent class="mt-5">
         <CascadingValue Value="isDarkMode">
-            @Body
+            <CascadingValue Value="currentPalette">
+                @Body
+            </CascadingValue>
         </CascadingValue>
     </MudMainContent>
 </MudLayout>
@@ -66,6 +68,7 @@
 @code {
     string? _page;
     public bool isDarkMode { get; set; } = true;
+    public Palette? currentPalette { get; set; }
     protected override void OnInitialized() // Corrected here
     {
         var uri = new Uri(NavManager.Uri).AbsolutePath;
@@ -78,6 +81,11 @@
         var uri = new Uri(e.Location);
         _page = uri.AbsolutePath;
         StateHasChanged();
+    }
+
+    private void GetCurrentPalette()
+    {
+        currentPalette = isDarkMode ? CustomTheme.PaletteDark : CustomTheme.PaletteLight;
     }
 
     void ToggleDarkMode()
