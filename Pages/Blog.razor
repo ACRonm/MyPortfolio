@@ -2,7 +2,6 @@
 @using System.Net.Http
 @using Markdig
 @using MyPortfolio.Components.Blog
-@inject HttpClient Http
 
 <PageTitle>My Adventures</PageTitle>
 
@@ -10,9 +9,6 @@
     <MudGrid>
         <MudItem sm="12" md="6">
             <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-            <MudText Typo="Typo.body1">@((MarkupString)(markdownContent ?? errorMessage))</MudText>
-        
-
         <BlogPost></BlogPost>
         </MudItem>
     </MudGrid>
@@ -20,20 +16,5 @@
 
 @code {
 
-    private string errorMessage = "Loading...";
-    private string? markdownContent;
 
-    protected override async Task OnInitializedAsync()
-    {
-
-        try
-        {
-            var markdown = await Http.GetStringAsync("/Blog/post1.md");
-            markdownContent = Markdig.Markdown.ToHtml(markdown);
-        }
-        catch (HttpRequestException)
-        {
-            errorMessage = "Failed to load content. No file found.";
-        }
-    }
 }

@@ -20,7 +20,9 @@ namespace MyPortfolio.Themes
                 H2 = new H2() { FontSize = "2rem" },
                 H3 = new H3() { FontSize = "1.75rem" },
                 H4 = new H4() { FontSize = "1.5rem" },
+                Body1 = new Body1() { FontSize = "medium" },
                 Body2 = new Body2() { FontSize = "small" },
+
             };
 
             PaletteLight = new PaletteLight()

@@ -1,11 +1,15 @@
 @page "/blogpost"
+
+@using System.Net.Http  
 @using System
+
+@inject HttpClient Http
+
 
 <div class="blog-post">
     <h2>@Title</h2>
     <p>@Date.ToShortDateString()</p>
-    <img src="@ImageUrl" alt="Blog post image" />
-    <p>@Content</p>
+    <MudText Typo="Typo.body1">@((MarkupString)(content ?? errorMessage))</MudText>
 </div>
 
 @code {
@@ -16,8 +20,35 @@
     public DateTime Date { get; set; } = DateTime.Now;
 
     [Parameter]
-    public string ImageUrl { get; set; } = "https://images.unsplash.com/photo-1486825586573-7131f7991bdd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVzdHxlbnwwfHwwfHx8MA%3D%3D";
+    public string? content { get; set; }
 
-    [Parameter]
-    public string Content { get; set; } = "Default content of the blog post.";
+    private string errorMessage = "Loading...";
+    private string? markdownContent;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        try
+        {
+            var markdown = await Http.GetStringAsync("/Blog/post1.md");
+            markdownContent = Markdig.Markdown.ToHtml(markdown);
+
+            content = TruncateText(markdownContent, 30);
+
+        }
+        catch (HttpRequestException)
+        {
+            errorMessage = "Failed to load content. No file found.";
+        }
+    }
+
+    private string TruncateText(string text, int wordLimit)
+    {
+        if (string.IsNullOrEmpty(text)) return text;
+
+        var words = text.Split(' ');
+        if (words.Length <= wordLimit) return text;
+
+        return string.Join(' ', words.Take(wordLimit)) + " [...]";
+    }
 }
