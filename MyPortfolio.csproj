@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c017da61-b226-4ee7-8e4f-6ec5e140b7bc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

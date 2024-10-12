@@ -4,38 +4,62 @@
 @using System
 @using MyPortfolio.Themes
 
+@inject IConfiguration Configuration
 @inject HttpClient Http
 
 
-<div class="blog-post-teaser" @onmouseover="GetPalette">
-    <h2>@Title</h2>
-    <p>@Date.ToShortDateString()</p>
-    <MudText Typo="Typo.body1">@((MarkupString)(content ?? errorMessage))</MudText>
+<div class="blog-post-teaser">
+    @foreach (var content in markdownContents)
+    {
+        <div class="blog-post-teaser__content" @key="content">
+            @((MarkupString)content)
+        </div>
+    }
 </div>
 
 @code {
-    [Parameter]
-    public string Title { get; set; } = "Default Title";
-
-    [Parameter]
-    public DateTime Date { get; set; } = DateTime.Now;
-
-    [Parameter]
-    public string? content { get; set; }
 
     private string errorMessage = "Loading...";
     private string? markdownContent;
+    private List<string> markdownContents = new List<string>();
 
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
     protected override async Task OnInitializedAsync()
     {
+        var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 
+        if (string.IsNullOrEmpty(token))
+        {
+            errorMessage = "Failed to load content. No API token found.";
+        }
         try
         {
-            var markdown = await Http.GetStringAsync("/Blog/post1.md");
-            markdownContent = Markdig.Markdown.ToHtml(markdown);
-            content = TruncateText(markdownContent, 30);
+            // Add the token to the Authorization header
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
+            Http.DefaultRequestHeaders.UserAgent.ParseAdd("request");
+
+            var repoApiUrl = "https://api.github.com/repos/ACRonm/MyBlogPosts/contents/My%20Blog%20Posts";
+
+            var response = await Http.GetFromJsonAsync<List<GitHubFile>>(repoApiUrl);
+
+            if (response == null)
+            {
+                errorMessage = "Failed to load content. No file found.";
+                return;
+            }
+
+            foreach (var file in response)
+            {
+                var fileResponse = await Http.GetFromJsonAsync<GitHubFileContent>(file.Url);
+
+                var markdown = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(fileResponse.Content));
+
+                Console.WriteLine("Markdown: " + markdown);
+
+                var htmlContent = Markdig.Markdown.ToHtml(markdown);
+                markdownContents.Add(htmlContent);
+            }
         }
         catch (HttpRequestException)
         {
@@ -50,11 +74,18 @@
         var words = text.Split(' ');
         if (words.Length <= wordLimit) return text;
 
-        return string.Join(' ', words.Take(wordLimit)) + " [...]";
+        return string.Join(' ', words.Take(wordLimit)) + " ...";
     }
 
-    private void GetPalette()
+    private class GitHubFile
     {
-        Console.WriteLine("Palette updated" + currentPalette);
+        public string? Name { get; set; }
+        public string? Url { get; set; }
     }
+
+    private class GitHubFileContent
+    {
+        public string? Content { get; set; }
+    }
+
 }
