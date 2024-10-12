@@ -20,7 +20,6 @@ builder.Services.Configure<GitHubSettings>(options => builder.Configuration.GetS
 builder.Services.AddScoped<ContentService>();
 
 
-
 var movieApiKey = builder.Configuration["GITHUB_TOKEN"];
 
 await builder.Build().RunAsync();

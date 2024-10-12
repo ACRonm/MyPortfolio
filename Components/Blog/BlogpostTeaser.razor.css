@@ -1,0 +1,19 @@
+::deep .blog-post-teaser {
+  /* padding: 1rem; */
+  position: relative;
+  background-color: rgba(26, 26, 39, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
+  box-shadow: none;
+}
+
+::deep .blog-post-teaser > h1 {
+  margin-bottom: 0.5rem;
+}
+::deep .blog-post-teaser {
+  transition: border 0.3s;
+  transition: background-color 0.3s;
+}
+
+::deep .blog-post-teaser:hover {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

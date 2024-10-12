@@ -17,15 +17,17 @@ namespace MyPortfolio.Services
 
         public async Task<List<string>> LoadContentAsync()
         {
-            string errorMessage = string.Empty;
             var token = Configuration["GitHubToken"];
 
             if (string.IsNullOrEmpty(token))
             {
-                errorMessage = "Failed to load content. No API token found.";
                 return content;
             }
 
+            // If The content is already loaded, clear it to stop duplicates
+            if (markdownContent.Count > 0)
+                markdownContent.Clear();
+            
             // Add the token to the Authorization header
             Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
 
@@ -35,31 +37,24 @@ namespace MyPortfolio.Services
 
             if (response == null)
             {
-                errorMessage = "Failed to load content. No files found.";
                 return content;
             }
-
             foreach (var file in response)
             {
-                var fileResponse = await Http.GetFromJsonAsync<GitHubFileContent>(file.Url);
+                var fileResponse = await Http.GetFromJsonAsync<GitHubFile>(file.Url);
 
-                if (fileResponse != null && !string.IsNullOrEmpty(fileResponse.Content))
+                if (!string.IsNullOrEmpty(fileResponse?.Content))
                 {
+
                     var markdown = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(fileResponse.Content));
+                    Console.WriteLine(markdown);
 
-                    markdown = TruncateText(markdown, 50);
-
-                    var htmlContent = Markdig.Markdown.ToHtml(markdown);
+                    var truncatedMarkdown = TruncateText(markdown, 50);
+                    var htmlContent = Markdig.Markdown.ToHtml(truncatedMarkdown);
 
                     markdownContent.Add(htmlContent);
-
-                }
-                else
-                {
-                    errorMessage = "Failed to load content. File content is empty.";
                 }
             }
-
             return markdownContent;
         }
 
@@ -78,10 +73,6 @@ namespace MyPortfolio.Services
         {
             public string? Name { get; set; }
             public string? Url { get; set; }
-        }
-
-        private class GitHubFileContent
-        {
             public string? Content { get; set; }
         }
 

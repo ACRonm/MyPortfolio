@@ -1,37 +1,42 @@
 ::deep .experience-card {
-    /* padding: 1rem; */
-    position: relative;
+  /* padding: 1rem; */
+  position: relative;
 }
 
 ::deep .experience-card {
-    /* padding: 1rem; */
-    position: relative;
-    background-color: rgba(26, 26, 39, 0);
-    border: 1px solid rgba(255, 255, 255, 0);
-    box-shadow: none;
+  /* padding: 1rem; */
+  position: relative;
+  background-color: rgba(26, 26, 39, 0);
+  border: 1px solid rgba(255, 255, 255, 0);
+  box-shadow: none;
 }
 
 ::deep .experience-card {
-    transition: background-color 0.1s ease, border 0.1s ease, box-shadow 0.1s ease;
+  transition: background-color 0.1s ease, border 0.1s ease, box-shadow 0.1s ease;
 }
 
 ::deep .experience-card:hover {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 ::deep .experience-card-header {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+::deep .experience-card {
+  transition: border 0.3s;
+  transition: background-color 0.3s;
 }
 
 ::deep .experience-card-icon {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    transition: transform 0.3s ease-in-out;
-    /* Add transition for transform */
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  transition: transform 0.3s ease-in-out;
+  /* Add transition for transform */
 }
 
 ::deep .experience-card:hover .experience-card-icon {
-    transform: translate(10px, -10px);
-    /* Move up and right on hover */
+  transform: translate(10px, -10px);
+  /* Move up and right on hover */
 }

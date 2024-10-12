@@ -1,0 +1,55 @@
+@page "/BlogpostTeaser"
+
+@using System.Net.Http
+@using System
+@using MyPortfolio.Themes
+@using MyPortfolio.Services
+
+@inject IConfiguration Configuration
+@inject HttpClient Http
+@inject ContentService ContentService
+
+
+<MudPaper class="blog-post-teaser px-5 py-4 mb-6 rounded-lg" Style="@( $"background-color: {backgroundColor};")"
+@onmouseover="HandleMouseOver" 
+@onmouseleave="HandleMouseLeave">
+    @TeaserContent
+</MudPaper>
+
+@code {
+    private string? color;
+    private string? backgroundColor;
+    [Parameter]
+    public string TeaserContent { get; set; } = "some content";
+    [CascadingParameter]
+    public Palette? currentPalette { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        // Ensure the component re-renders when currentPalette changes
+        base.OnParametersSet();
+        StateHasChanged();
+
+        if (currentPalette != null)
+            color = currentPalette.TextPrimary.ToString();
+
+    }
+
+    private void HandleMouseOver()
+    {
+        if (currentPalette != null)
+        {
+            color = currentPalette.Primary.ToString();
+            backgroundColor = currentPalette.Tertiary.ToString();
+        }
+    }
+
+    private void HandleMouseLeave()
+    {
+        if (currentPalette != null)
+        {
+            color = currentPalette.TextPrimary.ToString();
+            backgroundColor = "rgba(45,40,38,0)";
+        }
+    }
+}

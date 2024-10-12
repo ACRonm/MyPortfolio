@@ -1,7 +1,10 @@
 @page "/blog"
 @using System.Net.Http
 @using Markdig
-@using MyPortfolio.Components.Blog
+@using MyPortfolio.Components
+@using MyPortfolio.Services
+
+@inject ContentService ContentService
 
 <PageTitle>My Adventures</PageTitle>
 
@@ -10,7 +13,7 @@
         <MudGrid>
             <MudItem sm="12" md="6">
                 <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-                <BlogPostTeaser></BlogPostTeaser>
+
             </MudItem>
         </MudGrid>
     </MudContainer>
@@ -19,5 +22,26 @@
 @code {
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
+    private List<string> content = new List<string>();
+    private string errorMessage = "Loading...";
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+
+            var content = await ContentService.LoadContentAsync();
+
+            foreach (var item in content)
+            {
+                Console.WriteLine(item);
+            }
+
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
 
 }
