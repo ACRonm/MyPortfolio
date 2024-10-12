@@ -11,6 +11,11 @@
 <div class="blog-post-teaser">
     @foreach (var content in markdownContents)
     {
+        if (string.IsNullOrEmpty(content))
+        {
+            <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined">@errorMessage</MudAlert>
+            break;
+        }
         <div class="blog-post-teaser__content" @key="content">
             @((MarkupString)content)
         </div>
