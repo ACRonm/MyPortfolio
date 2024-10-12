@@ -21,8 +21,9 @@
     {
         @foreach (var content in markdownContent)
         {
-            <MudPaper class="blog-post-teaser-content px-5 py-4 mb-6 rounded-lg" @key="content" @onmouseover="HandleMouseOver"
-                @onmouseleave="HandleMouseLeave" Style="@( $"background-color: {backgroundColor};")">
+            <MudPaper class="blog-post-teaser-content px-5 py-4 mb-6 rounded-lg" @key="Guid.NewGuid()"
+                @onmouseover="HandleMouseOver" @onmouseleave="HandleMouseLeave"
+                Style="@( $"background-color: {backgroundColor};")">
                 @((MarkupString)content)
             </MudPaper>
         }
@@ -38,16 +39,21 @@
 
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
+    private bool isContentLoaded = false;
     protected override async Task OnInitializedAsync()
     {
-        try
+        if (!isContentLoaded)
         {
-            var content = await ContentService.LoadContentAsync();
-            markdownContent = content;
-        }
-        catch (Exception ex)
-        {
-            errorMessage = ex.Message;
+            try
+            {
+                var content = await ContentService.LoadContentAsync();
+                markdownContent = content;
+                isContentLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }
         }
     }
 
