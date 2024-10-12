@@ -9,16 +9,19 @@
 
 
 <div class="blog-post-teaser">
-    @foreach (var content in markdownContents)
+
+    @if (markdownContents.Count == 0)
     {
-        if (string.IsNullOrEmpty(content))
+        <p>@errorMessage</p>
+    }
+    else
+    {
+        @foreach (var content in markdownContents)
         {
-            <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined">@errorMessage</MudAlert>
-            break;
+            <div class="blog-post-teaser__content" @key="content">
+                @((MarkupString)content)
+            </div>
         }
-        <div class="blog-post-teaser__content" @key="content">
-            @((MarkupString)content)
-        </div>
     }
 </div>
 
@@ -34,9 +37,12 @@
     {
         var token = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 
+        Console.WriteLine("Token: " + token);
+
         if (string.IsNullOrEmpty(token))
         {
             errorMessage = "Failed to load content. No API token found.";
+            return;
         }
         try
         {
@@ -50,7 +56,7 @@
 
             if (response == null)
             {
-                errorMessage = "Failed to load content. No file found.";
+                errorMessage = "Failed to load content. No files found.";
                 return;
             }
 
