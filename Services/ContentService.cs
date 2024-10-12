@@ -47,8 +47,6 @@ namespace MyPortfolio.Services
                 {
 
                     var markdown = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(fileResponse.Content));
-                    Console.WriteLine(markdown);
-
                     var truncatedMarkdown = TruncateText(markdown, 50);
                     var htmlContent = Markdig.Markdown.ToHtml(truncatedMarkdown);
 
