@@ -1,13 +1,17 @@
 using System;
+using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 
 namespace MyPortfolio.Services
 {
     public class ContentService {
-        private List<string> content = new List<string>();
+
         private readonly IConfiguration Configuration;
         private readonly HttpClient Http = new HttpClient();
+        private List<GitHubFile>? GitHubFiles = new List<GitHubFile>();
+
 
         public ContentService(IConfiguration configuration)
         {
@@ -15,62 +19,56 @@ namespace MyPortfolio.Services
         }
         private List<string> markdownContent = new List<string>();
 
-        public async Task<List<string>> LoadContentAsync()
+        public async Task<List<GitHubFile>> LoadContentAsync()
         {
             var token = Configuration["GitHubToken"];
 
-            if (string.IsNullOrEmpty(token))
+            if (GitHubFiles != null && GitHubFiles.Count > 0)
             {
-                return content;
+                GitHubFiles.Clear();
             }
-
-            // If The content is already loaded, clear it to stop duplicates
-            if (markdownContent.Count > 0)
-                markdownContent.Clear();
             
             // Add the token to the Authorization header
             Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
 
             var repoApiUrl = "https://api.github.com/repos/ACRonm/MyBlogPosts/contents/My%20Blog%20Posts";
+            GitHubFiles = await Http.GetFromJsonAsync<List<GitHubFile>>(repoApiUrl);
 
-            var response = await Http.GetFromJsonAsync<List<GitHubFile>>(repoApiUrl);
+            if (GitHubFiles == null)
+                return new List<GitHubFile>();
 
-            if (response == null)
+            foreach (var file in GitHubFiles)
             {
-                return content;
-            }
-            foreach (var file in response)
-            {
+
                 var fileResponse = await Http.GetFromJsonAsync<GitHubFile>(file.Url);
 
-                if (!string.IsNullOrEmpty(fileResponse?.Content))
+                if (fileResponse?.Content != null)
                 {
+                    file.Content = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(fileResponse.Content));
+                }
 
-                    var markdown = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(fileResponse.Content));
-                    markdownContent.Add(markdown);
+                var commitApiUrl = $"https://api.github.com/repos/ACRonm/MyBlogPosts/commits?path={file.Path}&page=1&per_page=1";
+                var commitResponse = await Http.GetFromJsonAsync<JsonElement[]>(commitApiUrl);
+
+                if (commitResponse != null && commitResponse.Length > 0)
+                {
+                    file.CommitDate = commitResponse[0].GetProperty("commit").GetProperty("committer").GetProperty("date").GetString();
+                    file.Committer = commitResponse[0].GetProperty("commit").GetProperty("committer").GetProperty("name").GetString();
                 }
             }
-            return markdownContent;
+            return GitHubFiles;
         }
 
-
-        private string TruncateText(string text, int wordLimit)
-        {
-            if (string.IsNullOrEmpty(text)) return text;
-
-            var words = text.Split(' ');
-            if (words.Length <= wordLimit) return text;
-
-            return string.Join(' ', words.Take(wordLimit)) + " ...";
-        }
-
-        private class GitHubFile
+        public class GitHubFile
         {
             public string? Name { get; set; }
             public string? Url { get; set; }
             public string? Content { get; set; }
+            public string? CommitDate { get; set; }
+            public string? Committer { get; set; }
+            public string? Path { get; set; }
+            public string? Encoding { get; set; }
         }
-
     }
 }
 

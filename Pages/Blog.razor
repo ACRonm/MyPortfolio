@@ -32,20 +32,24 @@
 @code {
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
-    private List<string> content = new List<string>();
+    private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
     private List<string> truncatedContent = new List<string>();
     private string errorMessage = "Loading...";
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            content = await ContentService.LoadContentAsync();
+            GitHubFiles = await ContentService.LoadContentAsync();
 
-            foreach (var item in content)
+            foreach (var file in GitHubFiles)
             {
-                var truncatedItem = TruncateText(item, 30);
-                truncatedContent.Add(truncatedItem);
+                Console.WriteLine(file.Content);
+                Console.WriteLine(file.Name);
+                Console.WriteLine(file.Url);
+                Console.WriteLine(file.CommitDate);
+                Console.WriteLine(file.Committer);
             }
+
         }
         catch (Exception ex)
         {
