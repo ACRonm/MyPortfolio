@@ -1,8 +1,8 @@
 @page "/blog"
 @using System.Net.Http
 @using Markdig
-@using MyPortfolio.Components
 @using MyPortfolio.Services
+@using MyPortfolio.Components.Blog
 
 @inject ContentService ContentService
 
@@ -13,7 +13,17 @@
         <MudGrid>
             <MudItem sm="12" md="6">
                 <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-
+                @if (content.Count == 0)
+                {
+                    <MudProgressCircular Class="mt-5" Color="Color.Primary" Indeterminate="true" />
+                }
+                else
+                {
+                    @foreach (var item in content)
+                    {
+                        <BlogpostTeaser TeaserContent="@(new MarkupString(Markdown.ToHtml(item)))" />
+                    }
+                }
             </MudItem>
         </MudGrid>
     </MudContainer>
@@ -28,8 +38,7 @@
     {
         try
         {
-
-            var content = await ContentService.LoadContentAsync();
+            content = await ContentService.LoadContentAsync();
         }
         catch (Exception ex)
         {

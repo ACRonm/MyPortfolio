@@ -9,7 +9,6 @@
 @inject HttpClient Http
 @inject ContentService ContentService
 
-
 <MudPaper class="blog-post-teaser px-5 py-4 mb-6 rounded-lg" Style="@( $"background-color: {backgroundColor};")"
 @onmouseover="HandleMouseOver" 
 @onmouseleave="HandleMouseLeave">
@@ -20,7 +19,7 @@
     private string? color;
     private string? backgroundColor;
     [Parameter]
-    public string TeaserContent { get; set; } = "some content";
+    public MarkupString TeaserContent { get; set; }
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
 
