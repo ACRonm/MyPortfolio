@@ -41,12 +41,7 @@
                 file.Content = Markdown.ToHtml(file.Content);
                 file.Content = TruncateText(file.Content, 30);
 
-                file.CommitDate = "Last edited: " + DateTime.Parse(file.CommitDate).ToUniversalTime().AddHours(10).ToString("yyyy/MM/dd HH:mm:ss");
-                Console.WriteLine(file.Content);
-                Console.WriteLine(file.Name);
-                Console.WriteLine(file.Url);
-                Console.WriteLine(file.CommitDate);
-                Console.WriteLine(file.Committer);
+                file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToUniversalTime().AddHours(10).ToString("yyyy/MM/dd HH:mm");
             }
 
         }
