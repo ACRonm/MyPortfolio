@@ -9,14 +9,40 @@
 @inject HttpClient Http
 @inject ContentService ContentService
 
-<div class="blog-post-teaser pa-5 mb-4 rounded-lg" Style="@( $"background-color: {backgroundColor};")"
-    @onmouseover="HandleMouseOver" @onmouseleave="HandleMouseLeave">
-    @TeaserContent
-</div>
+<MudItem sm="6" md="6">
+    <MudCard class="rounded-lg" Style="@($"background-color: {backgroundColor}; height:100%;")">
+        <MudCardHeader>
+            <CardHeaderAvatar>
+                <MudAvatar Color="Color.Secondary">I</MudAvatar>
+            </CardHeaderAvatar>
+            <CardHeaderContent>
+                <MudText Typo="Typo.body1">@Title</MudText>
+                <MudText Typo="Typo.body2">@EditDate</MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+            </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardMedia Image="images/me.avif" Height="250" />
+        <MudCardContent style="">
+            <MudText Typo="Typo.body2">@TeaserContent</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+            <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+        </MudCardActions>
+    </MudCard>
+</MudItem>
+
+
 
 @code {
     private string? color;
     private string? backgroundColor;
+    [Parameter]
+    public string? Title { get; set; } = "Title";
+    [Parameter]
+    public string? EditDate { get; set; }
     [Parameter]
     public MarkupString TeaserContent { get; set; }
     [CascadingParameter]
@@ -28,26 +54,10 @@
         base.OnParametersSet();
         StateHasChanged();
 
-        if (currentPalette != null)
-            color = currentPalette.TextPrimary.ToString();
+
+        color = currentPalette?.TextPrimary.ToString();
+        backgroundColor = currentPalette?.Tertiary.ToString();
 
     }
 
-    private void HandleMouseOver()
-    {
-        if (currentPalette != null)
-        {
-            color = currentPalette.Primary.ToString();
-            backgroundColor = currentPalette.Tertiary.ToString();
-        }
-    }
-
-    private void HandleMouseLeave()
-    {
-        if (currentPalette != null)
-        {
-            color = currentPalette.TextPrimary.ToString();
-            backgroundColor = "rgba(45,40,38,0)";
-        }
-    }
 }

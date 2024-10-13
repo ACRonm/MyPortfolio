@@ -6,25 +6,21 @@
 
 @inject ContentService ContentService
 
-<PageTitle>My Adventures</PageTitle>
-
 <CascadingValue Value="currentPalette">
     <MudContainer>
         <MudGrid>
-            <MudItem sm="12" md="6">
-                <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-                @if (truncatedContent.Count == 0)
+            @if (GitHubFiles.Count == 0)
+            {
+                <MudProgressCircular Class="mt-5" Color="Color.Primary" Indeterminate="true" />
+            }
+            else
+            {
+                @foreach (var file in GitHubFiles)
                 {
-                    <MudProgressCircular Class="mt-5" Color="Color.Primary" Indeterminate="true" />
+                    <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
+                        EditDate="@file.CommitDate" />
                 }
-                else
-                {
-                    @foreach (var item in truncatedContent)
-                    {
-                        <BlogpostTeaser TeaserContent="@(new MarkupString(Markdown.ToHtml(item)))" />
-                    }
-                }
-            </MudItem>
+            }
         </MudGrid>
     </MudContainer>
 </CascadingValue>
@@ -33,7 +29,6 @@
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
     private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
-    private List<string> truncatedContent = new List<string>();
     private string errorMessage = "Loading...";
     protected override async Task OnInitializedAsync()
     {
@@ -43,6 +38,10 @@
 
             foreach (var file in GitHubFiles)
             {
+                file.Content = Markdown.ToHtml(file.Content);
+                file.Content = TruncateText(file.Content, 30);
+
+                file.CommitDate = "Last edited: " + DateTime.Parse(file.CommitDate).ToUniversalTime().AddHours(10).ToString("yyyy/MM/dd HH:mm:ss");
                 Console.WriteLine(file.Content);
                 Console.WriteLine(file.Name);
                 Console.WriteLine(file.Url);
