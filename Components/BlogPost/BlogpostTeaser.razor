@@ -23,7 +23,7 @@
                 <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
             </CardHeaderActions>
         </MudCardHeader>
-        <MudCardMedia Image="images/me.avif" Height="250" />
+        <MudCardMedia Image="@ImageUrl" Height="250" />
         <MudCardContent style="">
             <MudText Typo="Typo.body2">@TeaserContent</MudText>
         </MudCardContent>
@@ -39,6 +39,9 @@
 @code {
     private string? color;
     private string? backgroundColor;
+    [Parameter]
+    public string? ImageUrl { get; set; } =
+    "https://imagedelivery.net/P9L8ltIQd-qvSr7N3Sj8uw/26c9b99c-b595-440b-a690-7370ecca6400/public";
     [Parameter]
     public string? Title { get; set; } = "Title";
     [Parameter]
