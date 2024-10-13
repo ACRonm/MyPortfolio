@@ -2,7 +2,7 @@
 @using System.Net.Http
 @using Markdig
 @using MyPortfolio.Services
-@using MyPortfolio.Components.Blog
+@using MyPortfolio.Components.BlogPost
 
 @inject ContentService ContentService
 
@@ -13,13 +13,13 @@
         <MudGrid>
             <MudItem sm="12" md="6">
                 <MudText Typo="Typo.h4" class="mt-5" Color="Color.Secondary">My Adventures</MudText>
-                @if (content.Count == 0)
+                @if (truncatedContent.Count == 0)
                 {
                     <MudProgressCircular Class="mt-5" Color="Color.Primary" Indeterminate="true" />
                 }
                 else
                 {
-                    @foreach (var item in content)
+                    @foreach (var item in truncatedContent)
                     {
                         <BlogpostTeaser TeaserContent="@(new MarkupString(Markdown.ToHtml(item)))" />
                     }
@@ -33,18 +33,37 @@
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
     private List<string> content = new List<string>();
+    private List<string> truncatedContent = new List<string>();
     private string errorMessage = "Loading...";
     protected override async Task OnInitializedAsync()
     {
         try
         {
             content = await ContentService.LoadContentAsync();
+
+            foreach (var item in content)
+            {
+                var truncatedItem = TruncateText(item, 30);
+                truncatedContent.Add(truncatedItem);
+            }
         }
         catch (Exception ex)
         {
             errorMessage = ex.Message;
         }
+
     }
 
-
+    public string TruncateText(string text, int length)
+    {
+        var words = text.Split(' ');
+        if (words.Length > length)
+        {
+            return string.Join(" ", words.Take(length)) + "...";
+        }
+        else
+        {
+            return text;
+        }
+    }
 }

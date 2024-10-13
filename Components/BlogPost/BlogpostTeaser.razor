@@ -9,11 +9,10 @@
 @inject HttpClient Http
 @inject ContentService ContentService
 
-<MudPaper class="blog-post-teaser px-5 py-4 mb-6 rounded-lg" Style="@( $"background-color: {backgroundColor};")"
-@onmouseover="HandleMouseOver" 
-@onmouseleave="HandleMouseLeave">
+<div class="blog-post-teaser pa-5 mb-4 rounded-lg" Style="@( $"background-color: {backgroundColor};")"
+    @onmouseover="HandleMouseOver" @onmouseleave="HandleMouseLeave">
     @TeaserContent
-</MudPaper>
+</div>
 
 @code {
     private string? color;

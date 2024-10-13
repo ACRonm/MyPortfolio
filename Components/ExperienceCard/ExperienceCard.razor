@@ -3,8 +3,9 @@
 @inject MudTheme CustomTheme
 
 <div class="experience-card">
-    <MudPaper id="card1" class="experience-card rounded-lg px-5 py-4 mb-6" @onmouseover="HandleMouseOver"
-        @onmouseleave="HandleMouseLeave" Style="@( $"background-color: {backgroundColor};")">
+    <MudPaper id="@Guid.NewGuid().ToString()" class="experience-card rounded-lg px-5 py-4 mb-6"
+        @onmouseover="HandleMouseOver" @onmouseleave="HandleMouseLeave"
+        Style="@( $"background-color: {backgroundColor};")">
         <a href="@Url" target="_blank">
             <MudGrid>
                 <MudItem xs="3" class="experience-card-date">
