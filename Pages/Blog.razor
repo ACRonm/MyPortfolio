@@ -1,5 +1,6 @@
 @page "/blog"
 @using System.Net.Http
+@using HtmlAgilityPack
 @using Markdig
 @using MyPortfolio.Services
 @using MyPortfolio.Components.BlogPost
@@ -18,7 +19,7 @@
                 @foreach (var file in GitHubFiles)
                 {
                     <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
-                        EditDate="@file.CommitDate" />
+                        EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" />
                 }
             }
         </MudGrid>
@@ -38,10 +39,42 @@
 
             foreach (var file in GitHubFiles)
             {
-                file.Content = Markdown.ToHtml(file.Content);
+                file.Content = file.Content != null ? Markdown.ToHtml(file.Content) : "Error loading content";
+
+                var doc = new HtmlDocument();
+                doc.LoadHtml(file.Content);
+
+                // Extract image URL
+                var imgNode = doc.DocumentNode.SelectSingleNode("//img");
+                file.ImageUrl = imgNode != null ? imgNode.GetAttributeValue("src", "defaultImage.jpg") : "defaultImage.jpg";
+
+                // Extract tags
+                var tagsNode = doc.DocumentNode.SelectSingleNode("//p[text()='tags:']/following-sibling::ul");
+                if (tagsNode != null)
+                {
+                    file.Tags = tagsNode.SelectNodes("li").Select(li => li.InnerText).ToList();
+                    tagsNode.ParentNode.Remove();
+                }
+                else
+                {
+                    file.Tags = new List<string>();
+                }
+
+                // Extract teaser content
+                file.Content = doc.DocumentNode.InnerText;
+
                 file.Content = TruncateText(file.Content, 30);
 
-                file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToUniversalTime().AddHours(10).ToString("yyyy/MM/dd HH:mm");
+                if (!string.IsNullOrEmpty(file.CommitDate))
+                {
+                    file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToLocalTime().ToString("yyyy/MM/dd HH:mm");
+                }
+                else
+                {
+                    file.CommitDate = "Last updated: Unknown";
+                }
+
+
             }
 
         }
@@ -54,6 +87,7 @@
 
     public string TruncateText(string text, int length)
     {
+
         var words = text.Split(' ');
         if (words.Length > length)
         {

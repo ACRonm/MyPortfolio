@@ -10,7 +10,7 @@
 @inject ContentService ContentService
 
 <MudItem sm="12" md="6">
-    <MudCard class="rounded-lg" Style="@($"background-color: {backgroundColor}; height:100%;")">
+    <MudCard Outlined="true" class="rounded-lg" Style="@($"background-color: {backgroundColor}; height:100%;")">
         <MudCardHeader>
             <CardHeaderAvatar>
                 <MudAvatar Color="Color.Secondary">I</MudAvatar>
@@ -19,9 +19,6 @@
                 <MudText Typo="Typo.body1">@Title</MudText>
                 <MudText Typo="Typo.body2">@EditDate</MudText>
             </CardHeaderContent>
-            <CardHeaderActions>
-                <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
-            </CardHeaderActions>
         </MudCardHeader>
         <MudCardMedia Image="@ImageUrl" Height="250" />
         <MudCardContent style="">
@@ -30,6 +27,13 @@
         <MudCardActions>
             <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
             <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+            @if (Tags != null)
+            {
+                @foreach (var tag in Tags)
+                {
+                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
+                }
+            }
         </MudCardActions>
     </MudCard>
 </MudItem>
@@ -39,6 +43,8 @@
 @code {
     private string? color;
     private string? backgroundColor;
+    [Parameter]
+    public List<string>? Tags { get; set; }
     [Parameter]
     public string? ImageUrl { get; set; } =
     "https://imagedelivery.net/P9L8ltIQd-qvSr7N3Sj8uw/26c9b99c-b595-440b-a690-7370ecca6400/public";

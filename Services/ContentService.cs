@@ -68,6 +68,8 @@ namespace MyPortfolio.Services
             public string? Committer { get; set; }
             public string? Path { get; set; }
             public string? Encoding { get; set; }
+            public string? ImageUrl { get; set; }
+            public List<string>? Tags { get; set; }
         }
     }
 }
