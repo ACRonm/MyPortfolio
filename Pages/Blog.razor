@@ -19,7 +19,7 @@
                 @foreach (var file in GitHubFiles)
                 {
                     <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
-                        EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" />
+                        EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
                 }
             }
         </MudGrid>
@@ -43,10 +43,6 @@
 
                 var doc = new HtmlDocument();
                 doc.LoadHtml(file.Content);
-
-                // Extract image URL
-                var imgNode = doc.DocumentNode.SelectSingleNode("//img");
-                file.ImageUrl = imgNode != null ? imgNode.GetAttributeValue("src", "defaultImage.jpg") : "defaultImage.jpg";
 
                 // Extract tags
                 var tagsNode = doc.DocumentNode.SelectSingleNode("//p[text()='tags:']/following-sibling::ul");
