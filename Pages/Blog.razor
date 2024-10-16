@@ -18,8 +18,12 @@
             {
                 @foreach (var file in GitHubFiles)
                 {
-                    <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
-                        EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
+                    <MudItem sm="12" md="6">
+                    <a href="/blogpost/@file.Name">
+                        <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
+                            EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
+                    </a>
+                    </MudItem>
                 }
             }
         </MudGrid>
@@ -40,7 +44,6 @@
             foreach (var file in GitHubFiles)
             {
                 file.Content = file.Content != null ? Markdown.ToHtml(file.Content) : "Error loading content";
-
 
                 // Extract teaser content
                 file.Content = TruncateText(file.Content, 30);

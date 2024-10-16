@@ -107,7 +107,6 @@ namespace MyPortfolio.Services
             {
                 foreach (var tag in tagsNode.SelectNodes("li"))
                 {
-                    Console.WriteLine(tag.InnerText);
                     tags.Add(tag.InnerText);
                     tagsNode.Remove();
                 }

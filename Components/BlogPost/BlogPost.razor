@@ -1,0 +1,30 @@
+@using MyPortfolio.Services
+
+@inject ContentService ContentService
+
+@page "/blogpost/{name}"
+
+<MudContainer>
+    <MudGrid>
+        <MudItem sm="12" md="6">
+            @if (GitHubFile != null)
+            {
+                
+            }
+            else
+            {
+                <MudText Typo="Typo.h2">Error loading content</MudText>
+            }
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+
+    [Parameter]
+    public string Name { get; set; }
+
+    private ContentService.GitHubFile? GitHubFile;
+
+
+}
