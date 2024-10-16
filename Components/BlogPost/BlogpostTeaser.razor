@@ -9,11 +9,11 @@
 @inject HttpClient Http
 @inject ContentService ContentService
 
-<MudItem sm="12" md="6">
+
     <MudCard Outlined="true" class="rounded-lg" Style="@($"background-color: {backgroundColor}; height:100%;")">
         <MudCardHeader>
             <CardHeaderContent>
-                <MudText Typo="Typo.h2" style="font-weight: 600;">@Title</MudText>
+                <MudText Typo="Typo.h2">@Title</MudText>
                 <MudText Typo="Typo.body2">@EditDate</MudText>
             </CardHeaderContent>
         </MudCardHeader>
@@ -32,7 +32,6 @@
             }
         </MudCardActions>
     </MudCard>
-</MudItem>
 
 
 
@@ -42,8 +41,7 @@
     [Parameter]
     public List<string>? Tags { get; set; }
     [Parameter]
-    public string? ImageUrl { get; set; } =
-    "https://imagedelivery.net/P9L8ltIQd-qvSr7N3Sj8uw/26c9b99c-b595-440b-a690-7370ecca6400/public";
+    public string? ImageUrl { get; set; }
     [Parameter]
     public string? Title { get; set; } = "Title";
     [Parameter]
