@@ -41,30 +41,9 @@
             {
                 file.Content = file.Content != null ? Markdown.ToHtml(file.Content) : "Error loading content";
 
-                var doc = new HtmlDocument();
-                doc.LoadHtml(file.Content);
-
-                // Extract tags
-                var tagsNode = doc.DocumentNode.SelectSingleNode("//p[text()='tags:']/following-sibling::ul");
-                var tagsParagraph = doc.DocumentNode.SelectSingleNode("//p[text()='tags:']");
-                if (tagsParagraph != null)
-                {
-                    Console.WriteLine(tagsParagraph.OuterHtml);
-
-                    tagsParagraph.Remove(); // Remove the <p>tags:</p> node from the document
-                }
-                if (tagsNode != null)
-                {
-                    file.Tags = tagsNode.SelectNodes("li").Select(li => li.InnerText).ToList();
-                    tagsNode.Remove(); // Remove the tags node from the document
-                }
-                else
-                {
-                    file.Tags = new List<string>();
-                }
 
                 // Extract teaser content
-                file.Content = TruncateText(doc.DocumentNode.InnerText, 30);
+                file.Content = TruncateText(file.Content, 30);
 
                 if (!string.IsNullOrEmpty(file.CommitDate))
                 {

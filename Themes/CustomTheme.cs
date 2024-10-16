@@ -32,7 +32,7 @@ namespace MyPortfolio.Themes
                 Secondary = "#8B0000",
                 TextPrimary = "#333",
                 AppbarBackground = "#f5f5f5",
-                Tertiary = "rgba(174,145,164,0.6)"
+                Tertiary = "rgba(174,145,164,0.4)"
             };
 
             PaletteDark = new PaletteDark()
@@ -42,7 +42,7 @@ namespace MyPortfolio.Themes
                 Primary = "#FFC701",
                 TextPrimary = "#CBD6ED",
                 Secondary = "#FFC701",
-                Tertiary = "rgba(45,40,38,0.6)"
+                Tertiary = "rgba(45,40,38,0.4)"
             };
         }
     }

@@ -71,7 +71,9 @@ namespace MyPortfolio.Services
 
                 file.ImageUrl = ParseTeaserImage(doc);
 
-                file.Tags = GetTags(doc);
+                GitHubFile temp = new GitHubFile();
+
+                ExtractTags(file, doc);
 
             }
             return GitHubFiles;
@@ -95,12 +97,11 @@ namespace MyPortfolio.Services
 
 
         // TODO: Ensure that tags are correctly removed from the document and returned as a list of strings
-        public List<string> GetTags(HtmlDocument content)
+        public void ExtractTags(GitHubFile file, HtmlDocument content)
         {
             var tags = new List<string>();
             var tagsNode = content.DocumentNode.SelectSingleNode("//p[text()='tags:']/following-sibling::ul");
             var tagsParagraph = content.DocumentNode.SelectSingleNode("//p[text()='tags:']");
-
             
             if (tagsNode != null)
             {
@@ -116,9 +117,9 @@ namespace MyPortfolio.Services
                 tagsParagraph.Remove();
             }
 
-            Console.WriteLine(tags);
+            file.Content = content.DocumentNode.InnerHtml;           
 
-            return tags;
+            file.Tags = tags;
         }
         public class GitHubFile
         {
