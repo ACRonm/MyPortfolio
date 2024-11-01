@@ -12,7 +12,7 @@
         <MudGrid>
             @if (GitHubFiles.Count == 0)
             {
-                <MudProgressCircular Class="mt-5" Color="Color.Primary" Indeterminate="true" />
+                <MudProgressCircular Class="mt-5 justify-center" Color="Color.Primary" Indeterminate="true" />
             }
             else
             {
@@ -34,7 +34,6 @@
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
     private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
-    private string errorMessage = "Loading...";
     protected override async Task OnInitializedAsync()
     {
         try

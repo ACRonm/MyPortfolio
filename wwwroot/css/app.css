@@ -111,5 +111,5 @@ h1:focus {
     width: 100%;
     position: fixed;
     z-index: -1;
-    backdrop-filter: blur(12vmax);
+    backdrop-filter: blur(15vmax);
 }
