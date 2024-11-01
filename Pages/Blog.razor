@@ -34,6 +34,7 @@
     [CascadingParameter]
     public Palette? currentPalette { get; set; }
     private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
+    private string errorMessage = "";
     protected override async Task OnInitializedAsync()
     {
         try
