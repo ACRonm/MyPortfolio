@@ -25,7 +25,7 @@ namespace MyPortfolio.Services
 
         public async Task<List<GitHubFile>> LoadContentAsync()
         {
-            var token = Configuration["GitHubToken"];
+            var token = "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";
 
             if (GitHubFiles != null && GitHubFiles.Count > 0)
             {
@@ -35,7 +35,18 @@ namespace MyPortfolio.Services
             // Add the token to the Authorization header
             Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
 
-            var repoApiUrl = "https://api.github.com/repos/ACRonm/MyBlogPosts/contents/My%20Blog%20Posts";
+            var repoApiUrl = "http://localhost:5049/BlogPost";
+            var request = new HttpRequestMessage(HttpMethod.Get, repoApiUrl);
+
+            var response = await Http.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            Console.WriteLine(response);
+
+            GitHubFiles = await response.Content.ReadFromJsonAsync<List<GitHubFile>>();
+
+
+
             GitHubFiles = await Http.GetFromJsonAsync<List<GitHubFile>>(repoApiUrl);
 
             if (GitHubFiles == null)
