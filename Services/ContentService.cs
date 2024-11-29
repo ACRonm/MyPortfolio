@@ -25,8 +25,6 @@ namespace MyPortfolio.Services
 
         public async Task<List<GitHubFile>> LoadContentAsync()
         {
-            var token = "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";
-
             if (GitHubFiles != null && GitHubFiles.Count > 0)
             {
                 GitHubFiles.Clear();
