@@ -35,7 +35,7 @@ namespace MyPortfolio.Services
             // Add the token to the Authorization header
             Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
 
-            var repoApiUrl = "http://api.aidenr.staging/blogpost";
+            var repoApiUrl = "https://myportfolioapi-arg0ejd5hbc9bxa7.australiaeast-01.azurewebsites.net/blogpost";
             var request = new HttpRequestMessage(HttpMethod.Get, repoApiUrl);
 
             var response = await Http.SendAsync(request);
