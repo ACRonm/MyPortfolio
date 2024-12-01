@@ -1,12 +1,6 @@
-using System;
-using System.Diagnostics;
-using System.Net;
 using System.Net.Http.Json;
-using System.Reflection.Metadata;
-using System.Text.Json;
 using HtmlAgilityPack;
 using Markdig;
-
 
 namespace MyPortfolio.Services
 {
