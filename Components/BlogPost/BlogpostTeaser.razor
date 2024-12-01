@@ -8,9 +8,12 @@
 @inject IConfiguration Configuration
 @inject HttpClient Http
 @inject ContentService ContentService
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
 
 
-<MudCard Outlined="true" class="rounded-xl" Style="@($"background-color: {backgroundColor}; height:100%;")">
+<MudCard Outlined="true" class="rounded-xl" Style="@($"background-color: {backgroundColor}; height:100%;")"
+	Elevation="4">
 	<MudCardMedia Image="@ImageUrl" Height="250" />
 	<MudCardHeader>
 		<CardHeaderContent>
@@ -22,7 +25,10 @@
 		<MudText Typo="Typo.body2">@TeaserContent</MudText>
 	</MudCardContent>
 	<MudCardActions>
-		<MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+		<div>
+			<MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" @onclick=HandleShare>
+			</MudIconButton>
+		</div>
 		@if (Tags != null)
 		{
 			@foreach (var tag in Tags)
@@ -32,8 +38,6 @@
 		}
 	</MudCardActions>
 </MudCard>
-
-
 
 @code {
 	private string? color;
@@ -51,6 +55,7 @@
 	[CascadingParameter]
 	public Palette? currentPalette { get; set; }
 
+
 	protected override void OnParametersSet()
 	{
 		// Ensure the component re-renders when currentPalette changes
@@ -61,6 +66,13 @@
 		color = currentPalette?.TextPrimary.ToString();
 		backgroundColor = currentPalette?.Tertiary.ToString();
 
+	}
+
+	private async Task HandleShare()
+	{
+		string baseUrl = NavigationManager.BaseUri + "blogpost/";
+
+		await JSRuntime.InvokeVoidAsync("shareContent", Title, "Check out this post.", baseUrl + Title);
 	}
 
 }

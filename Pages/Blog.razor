@@ -43,8 +43,9 @@
 			{
 				@foreach (var file in GitHubFiles)
 				{
-					<MudItem sm="12" md="6">
-						<a href="/blogpost/@file.Name">
+					<MudItem sm="12" md="6" @onclick:stopPropagation="true">
+						@* <a href="/blogpost/@file.Name"> *@
+						<a>
 							<BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
 								EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
 						</a>
