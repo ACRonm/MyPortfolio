@@ -43,7 +43,7 @@
 			{
 				@foreach (var file in GitHubFiles)
 				{
-					<MudItem sm="12" md="6" @onclick:stopPropagation="true">
+					<MudItem sm="12" md="6">
 						@* <a href="/blogpost/@file.Name"> *@
 						<a>
 							<BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"

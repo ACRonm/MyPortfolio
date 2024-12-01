@@ -24,6 +24,9 @@
 	<MudCardContent style="">
 		<MudText Typo="Typo.body2">@TeaserContent</MudText>
 	</MudCardContent>
+	<a href="/blogpost/@Title" class="pl-5">
+		<MudText class="grow-on-hover" Typo="Typo.body1" Color="Color.Primary">Read more...</MudText>
+	</a>
 	<MudCardActions>
 		<div>
 			<MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" @onclick=HandleShare>
@@ -38,6 +41,28 @@
 		}
 	</MudCardActions>
 </MudCard>
+
+<style>
+	.grow-on-hover {
+		position: relative;
+		display: inline-block;
+	}
+
+	.grow-on-hover::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: currentColor;
+		transition: width 0.25s ease-out;
+	}
+
+	.grow-on-hover:hover::after {
+		width: 100%;
+	}
+</style>
 
 @code {
 	private string? color;

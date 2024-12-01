@@ -15,15 +15,17 @@
 			{
 				<MudText Typo="Typo.h1" style="font-weight: 900;">@Post.Title</MudText>
 				<div>
-					<MudText Typo="Typo.body2" Class="mt-3" Style="display: inline-block;">@Post.CommitDate</MudText>
-
-					<MudAvatar Style="display: inline-block; vertical-align: middle;">
-						<MudImage Src="images/profile-picture.webp" Alt="An image of the best dog ever!"></MudImage>
-					</MudAvatar>
+					<div style="display: flex; justify-content: space-between; align-items: center;">
+						<MudText Typo="Typo.body2">@Post.CommitDate</MudText>
+						<MudDivider Class="mx-2" style="width: 50px;" />
+						<MudAvatar Style="vertical-align: middle;">
+							<MudImage Src="images/profile-picture.webp" Alt="An image of the best dog ever!" />
+						</MudAvatar>
+					</div>
 				</div>
 				@foreach (var tag in Post.Tags!)
 				{
-					<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
+					<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary" class="mb-3">@tag</MudChip>
 				}
 				<MudText Typo="Typo.body1">@((MarkupString)(Post.Content ?? ""))</MudText>
 			}
@@ -41,6 +43,14 @@
 		</MudButton>
 	</MudItem>
 </MudContainer>
+
+<style>
+	p>img {
+		max-width: 100%;
+		height: auto;
+		padding: 1rem 0;
+	}
+</style>
 
 @code {
 
