@@ -61,8 +61,6 @@ namespace MyPortfolio.Services
 
 		public string ParseMarkdownToHtml(string content)
 		{
-			Console.WriteLine(content);
-
 			content = content != null ? Markdown.ToHtml(content) : string.Empty;
 
 			return content;
