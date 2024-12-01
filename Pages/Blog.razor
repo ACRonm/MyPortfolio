@@ -8,73 +8,98 @@
 @inject ContentService ContentService
 
 <CascadingValue Value="currentPalette">
-    <MudContainer>
-        <MudGrid>
-            @if (GitHubFiles.Count == 0)
-            {
-                <MudProgressCircular Class="mt-5 justify-center" Color="Color.Primary" Indeterminate="true" />
-            }
-            else
-            {
-                @foreach (var file in GitHubFiles)
-                {
-                    <MudItem sm="12" md="6">
-                        <a href="/blogpost/@file.Name">
-                        <BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
-                            EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
-                    </a>
-                    </MudItem>
-                }
-            }
-        </MudGrid>
-    </MudContainer>
+	<MudContainer>
+		<MudGrid>
+			@if (GitHubFiles.Count == 0)
+			{
+				@for (int i = 0; i < 6; i++) // Adjust the number of skeletons as needed
+				{
+					<MudItem sm="12" md="6">
+						<MudCard Outlined="true" class="rounded-xl" Style="height:100%; opacity:0.3;">
+							<MudCardMedia>
+								<MudSkeleton Height="250px" Width="100%" />
+							</MudCardMedia>
+							<MudCardHeader>
+								<CardHeaderContent>
+									<MudSkeleton Height="30px" Width="60%" />
+									<MudSkeleton Height="20px" Width="40%" />
+								</CardHeaderContent>
+							</MudCardHeader>
+							<MudCardContent>
+								<MudSkeleton Height="20px" Width="90%" />
+								<MudSkeleton Height="20px" Width="80%" />
+								<MudSkeleton Height="20px" Width="70%" />
+							</MudCardContent>
+							<MudCardActions>
+								<MudSkeleton Height="36px" Width="36px" />
+								<MudSkeleton Height="24px" Width="60px" />
+								<MudSkeleton Height="24px" Width="60px" />
+							</MudCardActions>
+						</MudCard>
+					</MudItem>
+				}
+			}
+			else
+			{
+				@foreach (var file in GitHubFiles)
+				{
+					<MudItem sm="12" md="6">
+						<a href="/blogpost/@file.Name">
+							<BlogpostTeaser TeaserContent="@(new MarkupString(file.Content ?? "Error loading content"))"
+								EditDate="@file.CommitDate" ImageUrl="@file.ImageUrl" Tags="@file.Tags" Title="@file.Name" />
+						</a>
+					</MudItem>
+				}
+			}
+		</MudGrid>
+	</MudContainer>
 </CascadingValue>
 
 @code {
-    [CascadingParameter]
-    public Palette? currentPalette { get; set; }
-    private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
-    private string errorMessage = "";
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            GitHubFiles = await ContentService.LoadContentAsync();
+	[CascadingParameter]
+	public Palette? currentPalette { get; set; }
+	private List<ContentService.GitHubFile> GitHubFiles = new List<ContentService.GitHubFile>();
+	private string errorMessage = "";
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			GitHubFiles = await ContentService.LoadContentAsync();
 
-            foreach (var file in GitHubFiles)
-            {
-                file.Content = file.Content != null ? Markdown.ToHtml(file.Content) : "Error loading content";
+			foreach (var file in GitHubFiles)
+			{
+				file.Content = file.Content != null ? Markdown.ToHtml(file.Content) : "Error loading content";
 
-                // Extract teaser content
-                file.Content = TruncateText(file.Content, 30);
+				// Extract teaser content
+				file.Content = TruncateText(file.Content, 30);
 
-                if (!string.IsNullOrEmpty(file.CommitDate))
-                {
-                    file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToLocalTime().ToString("yyyy/MM/dd HH:mm");
-                }
-                else
-                {
-                    file.CommitDate = "Last updated: Unknown";
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            errorMessage = ex.Message;
-        }
-    }
+				if (!string.IsNullOrEmpty(file.CommitDate))
+				{
+					file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToLocalTime().ToString("yyyy/MM/dd HH:mm");
+				}
+				else
+				{
+					file.CommitDate = "Last updated: Unknown";
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			errorMessage = ex.Message;
+		}
+	}
 
-    public string TruncateText(string text, int length)
-    {
+	public string TruncateText(string text, int length)
+	{
 
-        var words = text.Split(' ');
-        if (words.Length > length)
-        {
-            return string.Join(" ", words.Take(length)) + "...";
-        }
-        else
-        {
-            return text;
-        }
-    }
+		var words = text.Split(' ');
+		if (words.Length > length)
+		{
+			return string.Join(" ", words.Take(length)) + "...";
+		}
+		else
+		{
+			return text;
+		}
+	}
 }
