@@ -1,28 +1,31 @@
 @using MyPortfolio.Services
 @using System.Net.Http.Json
+@using HtmlAgilityPack;
 
 
 @inject ContentService ContentService
 
 @page "/blogpost/{name}"
 
-<h1> Work in progress</h1>
 
-<MudContainer>
+<MudContainer style="max-width: 800px; padding:  0;" Class="pt-3">
 	<MudGrid>
-		<MudItem>
-			@* back button *@
-			<MudItem>
-				<MudButton Href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
-					Class="my-5 rounded-pill">
-					<MudIcon Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Primary" Size="Size.Small" />
-					Back
-				</MudButton>
-			</MudItem>
+		<MudItem style="padding: 0;">
 			@if (Post != null)
 			{
-				<MudText Typo="Typo.h2">@Post.Title</MudText>
-				<MudText Typo="Typo.body1">@((MarkupString)(Post.Content ?? "Error: none found"))</MudText>
+				<MudText Typo="Typo.h1" style="font-weight: 900;">@Post.Title</MudText>
+				<div>
+					<MudText Typo="Typo.body2" Class="mt-3" Style="display: inline-block;">@Post.CommitDate</MudText>
+
+					<MudAvatar Style="display: inline-block; vertical-align: middle;">
+						<MudImage Src="images/profile-picture.webp" Alt="An image of the best dog ever!"></MudImage>
+					</MudAvatar>
+				</div>
+				@foreach (var tag in Post.Tags!)
+				{
+					<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
+				}
+				<MudText Typo="Typo.body1">@((MarkupString)(Post.Content ?? ""))</MudText>
 			}
 			else
 			{
@@ -30,6 +33,13 @@
 			}
 		</MudItem>
 	</MudGrid>
+	<MudItem>
+		<MudButton Href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
+			Class="my-5 rounded-pill">
+			<MudIcon Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Primary" Size="Size.Small" />
+			Back
+		</MudButton>
+	</MudItem>
 </MudContainer>
 
 @code {
@@ -41,12 +51,21 @@
 
 	protected override async Task OnInitializedAsync()
 	{
+
 		Post = await Http.GetFromJsonAsync<ContentService.GitHubFile>($"{ContentService.baseApiUrl}/blogpost/{Name}.md") ?? new
 		ContentService.GitHubFile();
 
 		if (Post != null)
 		{
 			Post.Content = Post.Content != null ? ContentService.ParseMarkdownToHtml(Post.Content) : "Error loading content";
+
+			var doc = new HtmlDocument();
+			doc.LoadHtml(Post.Content);
+
+			Post.CommitDate = DateTime.Parse(Post.CommitDate!).ToLocalTime().ToString("yyyy/MM/dd");
+
+
+			ContentService.ExtractTags(Post, doc);
 		}
 		else
 		{
