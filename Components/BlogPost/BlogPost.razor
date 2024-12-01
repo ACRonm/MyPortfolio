@@ -1,30 +1,55 @@
 @using MyPortfolio.Services
+@using System.Net.Http.Json
+
 
 @inject ContentService ContentService
 
 @page "/blogpost/{name}"
 
+<h1> Work in progress</h1>
+
 <MudContainer>
-    <MudGrid>
-        <MudItem sm="12" md="6">
-            @if (GitHubFile != null)
-            {
-                
-            }
-            else
-            {
-                <MudText Typo="Typo.h2">Error loading content</MudText>
-            }
-        </MudItem>
-    </MudGrid>
+	<MudGrid>
+		<MudItem sm="12" md="6">
+			@* back button *@
+			<MudItem sm="12" md="6">
+				<MudButton Href="/blog" Variant="Variant.Outlined" Color="Color.Primary" Class="mt-5 rounded-pill">
+					<MudIcon Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Primary" Class="pr-2" />
+					Back
+				</MudButton>
+			</MudItem>
+			@if (Post != null)
+			{
+				<MudText Typo="Typo.h2">@Post.Title</MudText>
+				<MudText Typo="Typo.body1">@((MarkupString)(Post.Content ?? "Error: none found"))</MudText>
+			}
+			else
+			{
+				<MudProgressCircular Class="mt-5 justify-center" Color="Color.Primary" Indeterminate="true" />
+			}
+		</MudItem>
+	</MudGrid>
 </MudContainer>
 
 @code {
 
-    [Parameter]
-    public string Name { get; set; } = "";
+	[Parameter]
+	public string Name { get; set; } = "";
+	public ContentService.GitHubFile? Post;
+	private readonly HttpClient Http = new HttpClient();
 
-    private ContentService.GitHubFile? GitHubFile;
+	protected override async Task OnInitializedAsync()
+	{
+		Post = await Http.GetFromJsonAsync<ContentService.GitHubFile>($"{ContentService.baseApiUrl}/blogpost/{Name}.md") ?? new
+		ContentService.GitHubFile();
 
-
+		if (Post != null)
+		{
+			Post.Content = Post.Content != null ? ContentService.ParseMarkdownToHtml(Post.Content) : "Error loading content";
+		}
+		else
+		{
+			Post = new ContentService.GitHubFile();
+		}
+	}
 }

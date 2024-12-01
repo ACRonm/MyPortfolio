@@ -15,16 +15,8 @@ builder.Services.AddMudServices();
 builder.Services.AddSingleton<MudTheme, CustomTheme>();
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-builder.Services.Configure<GitHubSettings>(options => builder.Configuration.GetSection("GitHub").Bind(options));
 builder.Services.AddScoped<ContentService>();
 
-
-var movieApiKey = builder.Configuration["GITHUB_TOKEN"];
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 await builder.Build().RunAsync();
-
-public class GitHubSettings
-{
-    public string? Token { get; set; }
-}

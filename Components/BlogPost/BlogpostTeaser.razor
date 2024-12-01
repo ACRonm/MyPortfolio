@@ -10,57 +10,57 @@
 @inject ContentService ContentService
 
 
-    <MudCard Outlined="true" class="rounded-lg" Style="@($"background-color: {backgroundColor}; height:100%;")">
-        <MudCardHeader>
-            <CardHeaderContent>
-                <MudText Typo="Typo.h2">@Title</MudText>
-                <MudText Typo="Typo.body2">@EditDate</MudText>
-            </CardHeaderContent>
-        </MudCardHeader>
-        <MudCardMedia Image="@ImageUrl" Height="250" />
-        <MudCardContent style="">
-            <MudText Typo="Typo.body2">@TeaserContent</MudText>
-        </MudCardContent>
-        <MudCardActions>
-            <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
-            @if (Tags != null)
-            {
-                @foreach (var tag in Tags)
-                {
-                    <MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
-                }
-            }
-        </MudCardActions>
-    </MudCard>
+<MudCard Outlined="true" class="rounded-xl" Style="@($"background-color: {backgroundColor}; height:100%;")">
+	<MudCardMedia Image="@ImageUrl" Height="250" />
+	<MudCardHeader>
+		<CardHeaderContent>
+			<MudText Typo="Typo.h2">@Title</MudText>
+			<MudText Typo="Typo.body2">@EditDate</MudText>
+		</CardHeaderContent>
+	</MudCardHeader>
+	<MudCardContent style="">
+		<MudText Typo="Typo.body2">@TeaserContent</MudText>
+	</MudCardContent>
+	<MudCardActions>
+		<MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+		@if (Tags != null)
+		{
+			@foreach (var tag in Tags)
+			{
+				<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
+			}
+		}
+	</MudCardActions>
+</MudCard>
 
 
 
 @code {
-    private string? color;
-    private string? backgroundColor;
-    [Parameter]
-    public List<string>? Tags { get; set; }
-    [Parameter]
-    public string? ImageUrl { get; set; }
-    [Parameter]
-    public string? Title { get; set; } = "Title";
-    [Parameter]
-    public string? EditDate { get; set; }
-    [Parameter]
-    public MarkupString TeaserContent { get; set; }
-    [CascadingParameter]
-    public Palette? currentPalette { get; set; }
+	private string? color;
+	private string? backgroundColor;
+	[Parameter]
+	public List<string>? Tags { get; set; }
+	[Parameter]
+	public string? ImageUrl { get; set; }
+	[Parameter]
+	public string? Title { get; set; } = "Title";
+	[Parameter]
+	public string? EditDate { get; set; }
+	[Parameter]
+	public MarkupString TeaserContent { get; set; }
+	[CascadingParameter]
+	public Palette? currentPalette { get; set; }
 
-    protected override void OnParametersSet()
-    {
-        // Ensure the component re-renders when currentPalette changes
-        base.OnParametersSet();
-        StateHasChanged();
+	protected override void OnParametersSet()
+	{
+		// Ensure the component re-renders when currentPalette changes
+		base.OnParametersSet();
+		StateHasChanged();
 
 
-        color = currentPalette?.TextPrimary.ToString();
-        backgroundColor = currentPalette?.Tertiary.ToString();
+		color = currentPalette?.TextPrimary.ToString();
+		backgroundColor = currentPalette?.Tertiary.ToString();
 
-    }
+	}
 
 }
