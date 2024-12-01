@@ -13,17 +13,12 @@ namespace MyPortfolio.Services
 	public class ContentService
 	{
 
-		private readonly IConfiguration Configuration;
 		private readonly HttpClient Http = new HttpClient();
 		private List<GitHubFile>? GitHubFiles = new List<GitHubFile>();
-		private string errorMessage = string.Empty;
 		public readonly string baseApiUrl;
-
-
 
 		public ContentService(IConfiguration configuration)
 		{
-			Configuration = configuration;
 			baseApiUrl = configuration["ApiSettings:BaseApiUrl"] ?? "";
 		}
 
