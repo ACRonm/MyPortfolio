@@ -9,5 +9,8 @@ function shareContent(title, text, url) {
         .catch((error) => console.log('Error sharing', error));
     } else {
         alert('Share not supported on this browser.');
+        return false;
     }
+
+    return true;
 }

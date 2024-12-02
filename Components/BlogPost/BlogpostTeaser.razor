@@ -10,6 +10,7 @@
 @inject ContentService ContentService
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
 
 
 <MudCard Outlined="true" class="rounded-xl" Style="@($"background-color: {backgroundColor}; height:100%;")"
@@ -17,7 +18,7 @@
 	<MudCardMedia Image="@ImageUrl" Height="250" />
 	<MudCardHeader>
 		<CardHeaderContent>
-			<MudText Typo="Typo.h2">@Title</MudText>
+			<MudText Style="font-weight: 400;" Typo="Typo.h2">@Title</MudText>
 			<MudText Typo="Typo.body2">@EditDate</MudText>
 		</CardHeaderContent>
 	</MudCardHeader>
@@ -25,13 +26,15 @@
 		<MudText Typo="Typo.body2">@TeaserContent</MudText>
 	</MudCardContent>
 	<a href="/blogpost/@Title" class="pl-5">
-		<MudText class="grow-on-hover" Typo="Typo.body1" Color="Color.Primary">Read more...</MudText>
+		<MudText class="grow-on-hover" Typo="Typo.button" Color="Color.Primary">Read more...</MudText>
 	</a>
 	<MudCardActions>
 		<div>
 			<MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" @onclick=HandleShare>
 			</MudIconButton>
 		</div>
+
+		<MudChipSet T="string" SelectionMode="SelectionMode.MultiSelection">
 		@if (Tags != null)
 		{
 			@foreach (var tag in Tags)
@@ -39,6 +42,8 @@
 				<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
 			}
 		}
+		</MudChipSet>
+
 	</MudCardActions>
 </MudCard>
 
@@ -98,6 +103,14 @@
 		string baseUrl = NavigationManager.BaseUri + "blogpost/";
 
 		await JSRuntime.InvokeVoidAsync("shareContent", Title, "Check out this post.", baseUrl + Title);
+
+		var result = await JSRuntime.InvokeAsync<bool>("shareContent", Title, "Check out this post.", baseUrl + Title);
+
+		if (result == false)
+		{
+			Snackbar.Add("This browser doesn't support sharing.", Severity.Warning);
+		}
+
 	}
 
 }
