@@ -8,9 +8,9 @@
 @page "/blogpost/{name}"
 
 
-<MudContainer MaxWidth="MaxWidth.Medium">
+<MudContainer MaxWidth="MaxWidth.Medium" class="pt-3">
 	<MudGrid>
-		<MudItem style="padding: 0;">
+		<MudItem>
 			@if (Post != null)
 			{
 				<MudText Typo="Typo.h1" style="font-weight: 900;">@Post.Title</MudText>
