@@ -8,9 +8,9 @@
 @page "/blogpost/{name}"
 
 
-<MudContainer MaxWidth="MaxWidth.Medium" class="pt-3">
+<MudContainer MaxWidth="MaxWidth.Medium" Breakpoint="Breakpoint.Sm">
 	<MudGrid>
-		<MudItem>
+		<MudItem xs="12" sm="12" md="12">
 			@if (Post != null)
 			{
 				<MudText Typo="Typo.h1" style="font-weight: 900;">@Post.Title</MudText>
@@ -19,7 +19,7 @@
 						<MudText Typo="Typo.body2">@Post.CommitDate</MudText>
 						<MudDivider Class="mx-2" style="width: 50px;" />
 						<MudAvatar Style="vertical-align: middle;">
-							<MudImage Src="images/profile-picture.webp" Alt="An image of the best dog ever!" />
+							<MudImage Src="images/profile-picture.webp" Alt="My profile picture" />
 						</MudAvatar>
 					</div>
 				</div>
@@ -35,7 +35,7 @@
 			}
 		</MudItem>
 	</MudGrid>
-	<MudItem>
+	<MudItem xs="12" sm="12" md="12">
 		<MudButton Href="/blog" typo="typo.Button" Variant="Variant.Outlined" Color="Color.Primary"
 			Class="my-5 rounded-pill">
 			<MudIcon Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Primary" Size="Size.Small" />
@@ -46,10 +46,13 @@
 
 <style>
 	p>img {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		max-width: 100%;
 		height: auto;
-		padding: 1rem 0;
 	}
 </style>
+
 
 @code {
 
