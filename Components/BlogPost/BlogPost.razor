@@ -8,7 +8,7 @@
 @page "/blogpost/{name}"
 
 
-<MudContainer MaxWidth="MaxWidth.Medium" Breakpoint="Breakpoint.Sm">
+<MudContainer MaxWidth="MaxWidth.Medium">
 	<MudGrid>
 		<MudItem xs="12" sm="12" md="12">
 			@if (Post != null)
@@ -43,6 +43,15 @@
 		</MudButton>
 	</MudItem>
 </MudContainer>
+
+<style>
+	p>img {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		max-width: 100%;
+		height: auto;
+	}
+</style>
 
 @code {
 
