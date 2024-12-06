@@ -43,7 +43,6 @@
 			}
 		}
 		</MudChipSet>
-
 	</MudCardActions>
 </MudCard>
 
@@ -106,9 +105,14 @@
 
 		var result = await JSRuntime.InvokeAsync<bool>("shareContent", Title, "Check out this post.", baseUrl + Title);
 
+		Console.WriteLine(result);
+
 		if (result == false)
 		{
-			Snackbar.Add("This browser doesn't support sharing.", Severity.Warning);
+			// copy to clipboard instead
+			await JSRuntime.InvokeVoidAsync("copyToClipboard", baseUrl + Title);
+
+			Snackbar.Add("Link copied to clipboard.", Severity.Info);
 		}
 
 	}

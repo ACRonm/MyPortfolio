@@ -7,6 +7,7 @@
 
 @page "/blogpost/{name}"
 
+<link href="css/app.css" rel="stylesheet" />
 
 <MudContainer MaxWidth="MaxWidth.Medium">
 	<MudGrid>
@@ -50,6 +51,26 @@
 		padding-bottom: 15px;
 		max-width: 100%;
 		height: auto;
+	}
+
+	a {
+		position: relative;
+		display: inline-block;
+	}
+
+	a::after {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 2px;
+		bottom: 0;
+		left: 0;
+		background-color: currentColor;
+		transition: width 0.25s ease-out;
+	}
+
+	a:hover::after {
+		width: 100%;
 	}
 </style>
 

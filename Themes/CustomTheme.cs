@@ -10,8 +10,8 @@ namespace MyPortfolio.Themes
             {
                 Default = new Default()
                 {
-                    FontFamily = new[] { "Roboto" },
-                },
+					FontFamily = new[] { "Inter" },
+				},
                 Button = new Button()
                 {
                     FontFamily = new[] { "Jetbrains Mono" },
