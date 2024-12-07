@@ -16,28 +16,7 @@
 			{
 				@for (int i = 0; i < 6; i++)
 				{
-					<MudItem xs="12" md="6">
-						<MudCard Outlined="true" class="rounded-xl" Style="height:100%; opacity:0.3;">
-							<MudSkeleton Height="250px" Width="100%" />
-							<MudCardHeader>
-								<CardHeaderContent>
-									<MudSkeleton Height="30px" Width="60%" />
-									<MudSkeleton Height="20px" Width="40%" />
-								</CardHeaderContent>
-							</MudCardHeader>
-							<MudCardContent>
-								<MudSkeleton Height="20px" Width="90%" />
-								<MudSkeleton Height="20px" Width="80%" />
-								<MudSkeleton Height="20px" Width="70%" />
-								<MudSkeleton Height="20px" Width="80%" />
-							</MudCardContent>
-							<MudCardActions>
-								<MudSkeleton Height="36px" Width="36px" />
-								<MudSkeleton Height="24px" Width="60px" />
-								<MudSkeleton Height="24px" Width="60px" />
-							</MudCardActions>
-						</MudCard>
-					</MudItem>
+					<BlogPostTeaserSkeleton />
 				}
 			}
 			else
@@ -77,7 +56,7 @@
 
 				if (!string.IsNullOrEmpty(file.CommitDate))
 				{
-					file.CommitDate = "Last updated: " + DateTime.Parse(file.CommitDate).ToLocalTime().ToString("yyyy/MM/dd");
+					file.CommitDate = DateTime.Parse(file.CommitDate).ToLocalTime().ToString("MMM dd, yyyy");
 				}
 				else
 				{

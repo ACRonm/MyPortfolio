@@ -1,0 +1,28 @@
+@using System.Net.Http
+@using HtmlAgilityPack
+@using Markdig
+@using MyPortfolio.Services
+@using MyPortfolio.Components.BlogPost
+
+<MudItem xs="12" md="6">
+	<MudCard Outlined="true" class="rounded-xl" Style="height:100%; opacity:0.3;">
+		<MudSkeleton Height="300px" Width="100%" />
+		<MudCardHeader>
+			<CardHeaderContent>
+				<MudSkeleton Height="30px" Width="60%" />
+				<MudSkeleton Height="20px" Width="40%" />
+			</CardHeaderContent>
+		</MudCardHeader>
+		<MudCardContent>
+			<MudSkeleton Height="20px" Width="90%" />
+			<MudSkeleton Height="20px" Width="80%" />
+			<MudSkeleton Height="20px" Width="70%" />
+			<MudSkeleton Height="20px" Width="80%" />
+		</MudCardContent>
+		<MudCardActions>
+			<MudSkeleton Height="64px" Width="36px" Class="ml-5 " style="border-radius: 50%;" />
+			<MudSkeleton Height="64px" Width="36px" Class="ml-5 " style="border-radius: 50%;" />
+			<MudSkeleton Height="64px" Width="36px" Class="ml-5 " style="border-radius: 50%;" />
+		</MudCardActions>
+	</MudCard>
+</MudItem>

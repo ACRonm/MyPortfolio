@@ -72,6 +72,22 @@
 	a:hover::after {
 		width: 100%;
 	}
+
+	p {
+		margin-bottom: 0.5rem;
+		margin-top: 0.5rem;
+	}
+
+	ul {
+		margin-left: 1rem;
+		list-style-type: disc;
+		/* Bullets for unordered lists */
+	}
+
+	ol {
+		list-style-type: decimal;
+		/* Numbers for ordered lists */
+	}
 </style>
 
 @code {
@@ -94,8 +110,10 @@
 			var doc = new HtmlDocument();
 			doc.LoadHtml(Post.Content);
 
-			Post.CommitDate = DateTime.Parse(Post.CommitDate!).ToLocalTime().ToString("yyyy/MM/dd");
-
+			if (!string.IsNullOrEmpty(Post.CommitDate))
+			{
+				Post.CommitDate = DateTime.Parse(Post.CommitDate).ToLocalTime().ToString("MMM dd, yyyy");
+			}
 
 			ContentService.ExtractTags(Post, doc);
 		}

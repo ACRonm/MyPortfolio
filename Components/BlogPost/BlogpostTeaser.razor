@@ -19,7 +19,10 @@
 	<MudCardHeader>
 		<CardHeaderContent>
 			<MudText Style="font-weight: 400;" Typo="Typo.h2">@Title</MudText>
-			<MudText Typo="Typo.body2">@EditDate</MudText>
+			<span style="display: inline-flex; align-items: center;" class="pt-2">
+				<MudIcon Icon="@Icons.Material.TwoTone.Edit" Title="Favorite" />
+				<MudText Typo="Typo.body2" style="margin-left: 8px;">@EditDate</MudText>
+			</span>
 		</CardHeaderContent>
 	</MudCardHeader>
 	<MudCardContent style="">
@@ -39,7 +42,7 @@
 		{
 			@foreach (var tag in Tags)
 			{
-				<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
+					<MudChip T="string" Variant="Variant.Text" Color="Color.Secondary">@tag</MudChip>
 			}
 		}
 		</MudChipSet>
