@@ -19,10 +19,16 @@
 	<MudCardHeader>
 		<CardHeaderContent>
 			<MudText Style="font-weight: 400;" Typo="Typo.h2">@Title</MudText>
-			<span style="display: inline-flex; align-items: center;" class="pt-2">
-				<MudIcon Icon="@Icons.Material.TwoTone.Edit" Title="Favorite" />
-				<MudText Typo="Typo.body2" style="margin-left: 8px;">@EditDate</MudText>
-			</span>
+			<div style="display: flex; align-items: center; gap: 16px;">
+				<span style="display: inline-flex; align-items: center;" class="pt-2">
+					<MudIcon Icon="@Icons.Material.TwoTone.Edit" Title="Last edited" />
+					<MudText Typo="Typo.body2" style="margin-left: 8px;">@EditDate</MudText>
+				</span>
+				<span style="display: inline-flex; align-items: center;" class="pt-2">
+					<MudIcon Icon="@Icons.Material.Filled.Timer" Title="Reading time" />
+					<MudText Typo="Typo.body2" style="margin-left: 8px;">@ReadingTime min read</MudText>
+				</span>
+			</div>
 		</CardHeaderContent>
 	</MudCardHeader>
 	<MudCardContent style="">
@@ -84,8 +90,10 @@
 	public string? EditDate { get; set; }
 	[Parameter]
 	public MarkupString TeaserContent { get; set; }
+	[Parameter]
+	public int ReadingTime { get; set; }
 	[CascadingParameter]
-	public Palette? currentPalette { get; set; }
+	public MyPortfolio.Themes.Palette? currentPalette { get; set; }
 
 
 	protected override void OnParametersSet()
@@ -98,6 +106,8 @@
 		color = currentPalette?.TextPrimary.ToString();
 		backgroundColor = currentPalette?.Tertiary.ToString();
 
+		// Calculate reading time based on content length (average reading speed: 200 words/minute)
+		ReadingTime = Math.Max(1, TeaserContent.Value.Split(' ').Length / 200);
 	}
 
 	private async Task HandleShare()
