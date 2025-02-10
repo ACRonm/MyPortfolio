@@ -23,9 +23,40 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet" />
+    
+    <!-- Font loading optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Critical font CSS -->
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Roboto'), url(https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+        }
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Inter'), url(https://rsms.me/inter/font-files/Inter-Regular.woff2) format('woff2');
+        }
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+
+    <!-- Preconnect to font domains -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    
+    <!-- Remove duplicate Inter font loading -->
+    <!-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
+    
     <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
     <link rel="manifest" href="/manifest.json">
     <script>
@@ -52,10 +83,6 @@
     </script>
     <!-- Add preload for critical resources -->
     <link rel="preload" href="_framework/blazor.webassembly.js" as="script" />
-    <link rel="preload" href="_framework/dotnet.runtime.8.0.0.fyjsnmc9h6.js" as="script" />
-    <link rel="preload" href="_framework/MyPortfolio.dll" as="fetch" crossorigin="anonymous" />
-    
-    <!-- Add critical CSS preload -->
     <link rel="preload" href="css/app.css" as="style" />
     <link rel="preload" href="_content/MudBlazor/MudBlazor.min.css" as="style" />
     
