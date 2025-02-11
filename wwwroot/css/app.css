@@ -84,6 +84,15 @@ h1:focus {
     }
 }
 
+@keyframes stripeMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 0;
+    }
+}
+
 #blob {
     background-color: white;
     height: 28vmax;
@@ -112,6 +121,30 @@ h1:focus {
     position: fixed;
     z-index: -1;
     backdrop-filter: blur(15vmax);
+}
+
+.fancy-progress {
+    transition: transform 0.3s ease-in-out;
+}
+
+.fancy-progress:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 0 10px rgba(255, 199, 1, 0.5);
+}
+
+.fancy-progress .mud-progress-linear-bar {
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.25) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0.25) 75%,
+        transparent 75%,
+        transparent
+    );
+    background-size: 20px 20px;
+    animation: stripeMove 1s linear infinite;
 }
 
  a {

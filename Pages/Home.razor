@@ -89,6 +89,16 @@
                 </span>
             </MudText>
 
+			<MudText Typo="Typo.h4" Color="Color.Secondary">Core Skills</MudText>
+			@foreach (var skill in skills)
+			{
+				<div class="my-2">
+					<MudText Typo="Typo.body1">@skill.Name</MudText>
+					<MudProgressLinear rounded="true" Value="@skill.Proficiency" Color="Color.Primary"
+						Class="mt-1 fancy-progress" />
+				</div>
+			}
+
             <MudText id="experience" Typo="Typo.h3" class="mt-5 mb-5" Color="Color.Secondary">Experience</MudText>
             @page "/Experience"
 
@@ -106,3 +116,14 @@
         </MudItem>
     </MudGrid>
 </MudContainer>
+
+@code {
+	private List<(string Name, int Proficiency)> skills
+	= new List<(string, int)> {
+("C#", 85),
+("Go", 70),
+("Docker", 65),
+("JavaScript", 75),
+		// Add more skills as needed
+	};
+}
